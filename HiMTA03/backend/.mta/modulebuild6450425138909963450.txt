@@ -1,0 +1,58 @@
+
+> deploy@ postinstall D:\SapCloud\SapCloud\himta03\backend\db
+> node .build.js
+
+npm WARN pt_backend@1.0.0 license should be a valid SPDX license expression
+
+audited 176 packages in 1.705s
+found 0 vulnerabilities
+
+
+> pt_backend@1.0.0 build D:\SapCloud\SapCloud\himta03\backend
+> cds build/all --clean
+
+
+[cds] - cds [3.10.0], compiler [1.13.4], home [D:\SapCloud\SapCloud\himta03\backend\node_modules\@sap\cds]
+
+[cds] - Determining CDS build tasks from [mta.yaml]
+[cds] - No CDS custom build tasks defined for project [D:\SapCloud\SapCloud\himta03\backend].
+[cds] - The following build tasks have been auto-created and will be executed.
+[cds] - You may want to add the following contents to the ./.cdsrc.json of your project and customize to your needs if required.
+{
+  "build": {
+    "target": ".",
+    "tasks": [
+      {"src":"db","for":"hana","options":{"model":["db","srv"]}},
+      {"src":"srv","for":"node-cf","options":{"model":["srv","db"]}}
+    ]
+  }
+}
+
+[cds] - building project [D:\SapCloud\SapCloud\himta03\backend], clean [true]
+
+[cds] - building module [db] using [Hana DB Module Builder]
+[cds] - model: db\Currency.cds, db\ExtraInfo.cds, srv\UserService.cds
+
+[cds] - building module [srv] using [Node CF Module Builder]
+[cds] - model: srv\UserService.cds, db\Currency.cds, db\ExtraInfo.cds
+
+[cds] - done > wrote output to:
+  db\src\gen\.hdinamespace
+  db\src\gen\BANK.hdbcds
+  db\src\gen\COURSE.hdbcds
+  db\src\gen\CURRENCY.hdbcds
+  db\src\gen\LOG.hdbcds
+  db\src\gen\ODATA_BANK.hdbcds
+  db\src\gen\ODATA_COURSE.hdbcds
+  db\src\gen\ODATA_CURRENCY.hdbcds
+  db\src\gen\ODATA_LOG.hdbcds
+  srv\gen\csn.json
+  srv\gen\_i18n\i18n.json
+[cds] - time: 1318.110ms
+npm WARN deploy@ No description
+npm WARN deploy@ No repository field.
+npm WARN deploy@ No license field.
+
+audited 48 packages in 6.55s
+found 1 high severity vulnerability
+  run `npm audit fix` to fix them, or `npm audit` for details
