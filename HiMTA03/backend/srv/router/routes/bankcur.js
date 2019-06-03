@@ -9,7 +9,7 @@ const dbClass = require(global.__base + "utils/dbClass");
 function _prepareObject(oVal, req) {
     let date = new Date();
 
-    if (oVal.createdby == undefined) oVal.createdby = "DebugBank";
+    if (oVal.createdby == undefined) oVal.createdby = "DebugBankCurrency";
     else oVal.createdby = req.body.createdby;
 
     oVal.createdon = date.toDateString().replace(/\s+/g, '-');
@@ -32,42 +32,65 @@ module.exports = () => {
 
     app.get("/", async (req, res, next) => {
         const logger = req.loggingContext.getLogger("/Application");
-        logger.info('Bank get <select_all> request');
+        logger.info('BankCur get <select_all> request');
         let tracer = req.loggingContext.getTracer(__filename);
-        tracer.entering("/bank", req, res);
+        tracer.entering("/bankcur", req, res);
 
         try {
-            tracer.exiting("/bank", "Bank Get Works. <select_all>");
-            AddToLog(req, db, "Bank Get Works. <select_all>");
+            tracer.exiting("/bankcur", "BankCur Get Works. <select_all>");
+            AddToLog(req, db, "BankCur Get Works. <select_all>");
 
             const db = new dbClass(req.db);
-            const sSql = 'SELECT * FROM \"BANK\"';
+            const sSql = 'SELECT * FROM \"BANKCURRENCY\"';
             var result = await db.getVal(sSql);
             res.type("application/json").status(201).send(JSON.stringify(result));
         } catch (e) {
-            tracer.catching("/bank", e);
+            tracer.catching("/bankcur", e);
             AddToLog(req, db, e.message);
             next(e);
         }
     });
 
-    app.get("/bankname", async (req, res, next) => {
+    app.get("/bid", async (req, res, next) => {
         const logger = req.loggingContext.getLogger("/Application");
-        logger.info('Bank get <select_by_name> request');
+        logger.info('BankCur get <select_by_bid> request');
         let tracer = req.loggingContext.getTracer(__filename);
-        tracer.entering("/bank/bankname", req, res);
+        tracer.entering("/bankcur/bid", req, res);
 
         try {
-            tracer.exiting("/bank/bankname", "Bank Get Works. <select_by_name>");
-            AddToLog(req, db, "Bank Get Works. <select_by_name>");
-            
+            tracer.exiting("/bankcur/bid", "BankCur Get Works. <select_by_bid>");
+            AddToLog(req, db, "BankCur Get Works. <select_by_bid>");
+
             const db = new dbClass(req.db);
-            const bankName = [ req.query.name ];
-            const sSql = 'SELECT * FROM \"BANK\" WHERE "NAME" = ?';
-            var result = await db.executeUpdate(sSql, bankName);
+            const bcid = [ req.query.bid ];
+            const sSql = 'SELECT * FROM \"BANKCURRENCY\" WHERE "BID" = ?';
+            var result = await db.executeUpdate(sSql, bcid);
             res.type("application/json").status(201).send(JSON.stringify(result));
         } catch (e) {
-            tracer.catching("/bank/bankname", e);
+            tracer.catching("/bankcur/bid", e);
+            AddToLog(req, db, e.message);
+            next(e);
+        }
+    });
+
+    app.get("/cuid", async (req, res, next) => {
+        const logger = req.loggingContext.getLogger("/Application");
+        logger.info('BankCur get <select_by_cuid> request');
+        let tracer = req.loggingContext.getTracer(__filename);
+        tracer.entering("/bankcur/cuid", req, res);
+
+        try {
+            tracer.exiting("/bankcur/cuid", "BankCur Get Works. <select_by_cuid>");
+            AddToLog(req, db, "BankCur Get Works. <select_by_cuid>");
+
+            const db = new dbClass(req.db);
+
+            const bcid = [ req.query.cuid ];
+            const sSql = 'SELECT * FROM \"BANKCURRENCY\" WHERE "CUID" = ?';
+            var result = await db.executeUpdate(sSql, bcid);
+            res.type("application/json").status(201).send(JSON.stringify(result));
+        } catch (e) {
+            tracer.catching("/bankcur/cuid", e);
             AddToLog(req, db, e.message);
             next(e);
         }
@@ -75,52 +98,26 @@ module.exports = () => {
 
     app.post("/", async (req, res, next) => {
         const logger = req.loggingContext.getLogger("/Application");
-        logger.info('Bank post request');
+        logger.info('BankCur put request');
         let tracer = req.loggingContext.getTracer(__filename);
-        tracer.entering("/bank", req, res);
+        tracer.entering("/bankcur", req, res);
 
         try {
-            tracer.exiting("/bank", "Bank POST Works");
-            AddToLog(req, db, "Bank POST Works");
+            tracer.exiting("/bankcur", "BankCur PUT Works.");
+            AddToLog(req, db, "BankCur PUT Works.");
 
             const db = new dbClass(req.db);
-            const oBank = _prepareObject(req.body, req);
-				  oBank.bid = await db.getNextval("bid");
 
-            const sSql = "INSERT INTO \"BANK\" VALUES(?, ?, ?, ?)";
-            const aValues = [ oBank.cuid, oBank.name, oBank.createdby, oBank.createdon ];
+            const oBC = _prepareObject(req.body, req);
+
+            const sSql = "INSERT INTO \"BANKCURRENCY\" VALUES(?, ?, ?, ?)";
+            const aValues = [ oBC.bid, oBC.cuid, oBC.createdby, oBC.createdon ];
             
             await db.executeUpdate(sSql, aValues);
 
-            res.type("application/json").status(201).send(JSON.stringify(oBank));
+            res.type("application/json").status(201).send(JSON.stringify(oBC));
         } catch (e) {
-            tracer.catching("/bank", e);
-            AddToLog(req, db, e.message);
-            next(e);
-        }
-    });
-
-    app.put("/", async (req, res, next) => {
-        const logger = req.loggingContext.getLogger("/Application");
-        logger.info('Bank put request');
-        let tracer = req.loggingContext.getTracer(__filename);
-        tracer.entering("/bank", req, res);
-
-        try {
-            tracer.exiting("/bank", "Bank PUT Works");
-            AddToLog(req, db, "Bank PUT Works");
-
-            const db = new dbClass(req.db);
-
-            const oBank = _prepareObject(req.body, req);
-            const sSql = "UPDATE \"BANK\" SET \"NAME\" = ?, \"CREATEDBY\" = ?, \"CREATEDON\" = ? WHERE \"BID\" = ?";
-						const aValues = [ oBank.name, oBank.createdby, oBank.createdon, oBank.bid ];
-
-            await db.executeUpdate(sSql, aValues);
-
-            res.type("application/json").status(200).send(JSON.stringify(oBank));
-        } catch (e) {
-            tracer.catching("/bank", e);
+            tracer.catching("/bankcur", e);
             AddToLog(req, db, e.message);
             next(e);
         }

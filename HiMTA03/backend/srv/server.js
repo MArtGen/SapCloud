@@ -72,9 +72,16 @@ cds
 //Setup Routes
 require("./router")(app, server);
 
-/* const schedulerExecute = require(global.__base + "utils/Scheduler").execute;
-schedulerExecute ();
-setInterval(schedulerExecute, 24 * 60 * 60 * 1000); */
+const schedulerExecute = require(global.__base + "utils/Scheduler").execute;
+schedulerExecute(app);
+setInterval(schedulerExecute, 24 * 60 * 60 * 1000);
+
+//logging
+const appContext = logging.createAppContext();
+app.use(logging.middleware({
+    appContext: appContext,
+    logNetwork: true
+}));
 
 //Error handling
 app.use(function (err, req, res, next) {

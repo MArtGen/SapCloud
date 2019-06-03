@@ -2,7 +2,6 @@
 using LOG as LOG;
 view ODATA_LOG as select from LOG as _LOG {
   _LOG.LOID,
-  _LOG.COID,
   _LOG.TEXT,
   _LOG.CREATEDBY,
   _LOG.CREATEDON

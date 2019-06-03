@@ -1,5 +1,5 @@
 ﻿type Id : Integer;
-using Bank from './ExtraInfo';
+using BankCurrency from './ExtraInfo';
 using Course from './ExtraInfo';
 
 entity Currency {
@@ -9,5 +9,5 @@ entity Currency {
 	createdon: String(30);
 
     toCourse : association to many Course on toCourse.cuid = cuid;
-    toBank : association to many Bank on toBank.cuid = cuid;
+    toBankCurrency : association to many BankCurrency on toBankCurrency.cuid = cuid;
 	};

@@ -3,12 +3,21 @@ using Id from './Currency';
 
 		entity Bank {
 			key bid : Id;
-			cuid : Integer;
 			name : String(100);
 			createdby: String(100);
 			createdon: String(30);
 
+			toBankCurrency : association to many BankCurrency on toBankCurrency.bid = bid;
+		};
+
+		entity BankCurrency {
+			key bid : Id;
+			key cuid : Id;
+			createdby: String(100);
+			createdon: String(30);
+
 			toCurrency : association to one Currency on toCurrency.cuid = cuid;
+			toBank : association to one Bank on toBank.bid = bid;
 		};
 
 		entity Course {
@@ -24,7 +33,6 @@ using Id from './Currency';
 
 		entity Log {
 		    key loid : Integer;
-			coid : Integer;
 		    text : String(200);
 			createdby: String(20);
 			createdon: String(30);
