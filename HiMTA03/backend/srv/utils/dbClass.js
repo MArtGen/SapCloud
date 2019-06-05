@@ -56,7 +56,6 @@ module.exports = class {
                 return result;
             }
         } catch (e) {
-            console.dir(statement);
 	        throw new Error("Internal error");
         }
         console.dir(statement);

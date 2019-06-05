@@ -21,6 +21,13 @@ const app = express();
 //Body parser
 app.use(bodyParser.json());
 
+//logging
+const appContext = logging.createAppContext();
+app.use(logging.middleware({
+    appContext: appContext,
+    logNetwork: true
+}));
+
 //Compression
 app.use(compression({
     threshold: "1b"
@@ -73,15 +80,8 @@ cds
 require("./router")(app, server);
 
 const schedulerExecute = require(global.__base + "utils/Scheduler").execute;
-schedulerExecute(app);
+schedulerExecute();
 setInterval(schedulerExecute, 24 * 60 * 60 * 1000);
-
-//logging
-const appContext = logging.createAppContext();
-app.use(logging.middleware({
-    appContext: appContext,
-    logNetwork: true
-}));
 
 //Error handling
 app.use(function (err, req, res, next) {

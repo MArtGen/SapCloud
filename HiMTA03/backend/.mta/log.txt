@@ -89,16 +89,16 @@ Caused by: java.io.IOException: CreateProcess error=2, The system cannot find th
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.proc.ModuleBuildDependency$$impl5 for bean interface com.sap.di.ext.mta.proc.ModuleBuildDependency
 [main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend
 [main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: created 4 verification tasks
-[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: started symbol module[lev_srv]
-[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: started symbol resource[lev_hdi]
 [pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: started symbol resource[lev_uaa]
+[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: started symbol resource[lev_hdi]
+[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: started symbol module[lev_srv]
 [pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: started symbol module[lev_db]
 [pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: finished symbol resource[lev_hdi]
 [pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: finished symbol resource[lev_uaa]
 [pool-1-thread-4] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'lev_srv': command timeout is 300 seconds
 [pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'lev_db': command timeout is 300 seconds
-[pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'lev_db': command output file is D:\sapcloud\sapcloud\himta03\backend\.mta\modulebuild3466714499265099991.txt
-[pool-1-thread-4] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'lev_srv': command output file is D:\sapcloud\sapcloud\himta03\backend\.mta\modulebuild14395199588620337092.txt
+[pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'lev_db': command output file is D:\sapcloud\sapcloud\himta03\backend\.mta\modulebuild6297892150414234546.txt
+[pool-1-thread-4] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'lev_srv': command output file is D:\sapcloud\sapcloud\himta03\backend\.mta\modulebuild7023189865704939773.txt
 [pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'lev_db': invoking command [npm.cmd, install, --production]
 [pool-1-thread-4] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'lev_srv': invoking command [npm.cmd, install, --production]
 [pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_backend: finished symbol module[lev_db]
