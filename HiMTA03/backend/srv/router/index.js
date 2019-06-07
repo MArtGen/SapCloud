@@ -6,4 +6,5 @@ module.exports = (app, server) => {
     app.use("/course", require("./routes/course")());
     app.use("/log", require("./routes/log")());
     app.use("/bankcur", require("./routes/bankcur")());
+    app.use("/dest", require("./routes/dest")());
 };

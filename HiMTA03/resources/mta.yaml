@@ -14,6 +14,20 @@ resources:
             hdi-container-name: '${service-name}'
         type: com.sap.xs.hdi-container
     -
+        name: lev_conn
+        type: org.cloudfoundry.managed-service
+        parameters:
+            service: connectivity
+            service-plan: lite
+            shared: true
+    -
+        name: lev_dest
+        type: org.cloudfoundry.managed-service
+        parameters:
+            service: destination
+            service-plan: lite
+            shared: true
+    -
         name: lev_uaa
         parameters:
             path: ./xs-security.json

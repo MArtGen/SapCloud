@@ -1,19 +1,10 @@
 
-┌───────────────────────────────────────────────────────────────────────┐
-│                        npm update check failed                        │
-│                  Try running with sudo or get access                  │
-│                 to the local update config store via                  │
-│ sudo chown -R $USER:$(id -gn $USER) C:\Users\artsiom.melekhau\.config │
-└───────────────────────────────────────────────────────────────────────┘
-
 > deploy@ postinstall D:\sapcloud\sapcloud\himta03\backend\db
 > node .build.js
 
 npm WARN pt_backend@1.0.0 license should be a valid SPDX license expression
 
-audited 176 packages in 1.698s
-found 0 vulnerabilities
-
+up to date in 9.656s
 
 > pt_backend@1.0.0 build D:\sapcloud\sapcloud\himta03\backend
 > cds build/all --clean
@@ -57,11 +48,9 @@ found 0 vulnerabilities
   db\src\gen\ODATA_LOG.hdbcds
   srv\gen\csn.json
   srv\gen\_i18n\i18n.json
-[cds] - time: 1679.210ms
+[cds] - time: 1240.386ms
 npm WARN deploy@ No description
 npm WARN deploy@ No repository field.
 npm WARN deploy@ No license field.
 
-audited 48 packages in 7.234s
-found 1 high severity vulnerability
-  run `npm audit fix` to fix them, or `npm audit` for details
+up to date in 14.396s

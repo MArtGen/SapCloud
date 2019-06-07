@@ -12,6 +12,12 @@ const compression = require("compression");
 const cds = require("@sap/cds");
 const bodyParser = require('body-parser');
 
+if (process.argv[2] === "--debug") {
+    global.DEBUG_MODE = true;
+    //Load environment variables for CLOUD
+    xsenv.loadEnv("debug-env.json");
+}
+
 https.globalAgent.options.ca = xsenv.loadCertificates();
 global.__base = __dirname + "/";
 
@@ -71,6 +77,7 @@ cds
         crashOnError: false
     })
     .at("/odata/")
+    .with(require("./router/odata.js"))
     .in(app)
     .catch(err => {
         // do not crash on error
@@ -81,7 +88,7 @@ require("./router")(app, server);
 
 const schedulerExecute = require(global.__base + "utils/Scheduler").execute;
 schedulerExecute();
-setInterval(schedulerExecute, 24 * 60 * 60 * 1000);
+setInterval(schedulerExecute, 12 * 60 * 60 * 1000);
 
 //Error handling
 app.use(function (err, req, res, next) {

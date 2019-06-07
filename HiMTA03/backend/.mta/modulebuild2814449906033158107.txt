@@ -4,9 +4,7 @@
 
 npm WARN pt_backend@1.0.0 license should be a valid SPDX license expression
 
-audited 176 packages in 1.104s
-found 0 vulnerabilities
-
+up to date in 9.985s
 
 > pt_backend@1.0.0 build D:\sapcloud\sapcloud\himta03\backend
 > cds build/all --clean
@@ -50,7 +48,7 @@ found 0 vulnerabilities
   db\src\gen\ODATA_LOG.hdbcds
   srv\gen\csn.json
   srv\gen\_i18n\i18n.json
-[cds] - time: 1749.593ms
+[cds] - time: 1268.280ms
 
 [cds] - cds [3.5.2], compiler [1.8.1], home [D:\sapcloud\sapcloud\himta03\backend\srv\node_modules\@sap\cds]
 
@@ -104,7 +102,5 @@ These build tasks will be required with the next release of @sap/cds. Please add
   db\src\gen\ODATA_LOG.hdbcds
   srv\gen\csn.json
   srv\gen\_i18n\i18n.json
-[0m[cds] - time: 1607.509ms
-audited 531 packages in 8.236s
-found 0 vulnerabilities
-
+[0m[cds] - time: 1168.635ms
+up to date in 15.711s
