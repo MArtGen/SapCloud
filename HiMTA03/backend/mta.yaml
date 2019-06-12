@@ -40,3 +40,9 @@ resources:
     -
         name: lev_uaa
         type: org.cloudfoundry.existing-service
+    -
+        name: lev_dest
+        type: org.cloudfoundry.existing-service
+    -
+        name: lev_conn
+        type: org.cloudfoundry.existing-service        

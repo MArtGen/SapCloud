@@ -39,13 +39,13 @@ app.use(compression({
     threshold: "1b"
 }));
 
-const hanaOptions = xsenv.getServices({
+/* const hanaOptions = xsenv.getServices({
     hana: {
         plan: "hdi-shared"
     }
-});
+}); */
 
-/* let hanaOptions = {
+let hanaOptions = {
     hana: {
         host: "zeus.hana.prod.eu-central-1.whitney.dbaas.ondemand.com",
         port: "21513",
@@ -59,7 +59,7 @@ const hanaOptions = xsenv.getServices({
         user: "LEV_SCP_4M6D3274UZJZ6PAOMLLV7NSDR_RT",
         password: "Vs2puzLB3tCODJD5MVtOs0jgnorTmQclpnxin57OQt0NnkaZgIrxJJ-XzWKC5E4b3h1V7qV0q4rLESeASxw063MUeztHDU1goZZvKojUf.nwQ63vAbxtOkKvJx-jbRQl"
     }
-}; */
+};
 
 hanaOptions.hana.pooling = true;
 app.use(

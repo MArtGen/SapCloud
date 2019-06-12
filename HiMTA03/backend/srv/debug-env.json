@@ -1,32 +1,34 @@
 {
     "VCAP_SERVICES": {
      "hanatrial": [
-      {
-       "binding_name": null,
-       "credentials": {
-        "driver": "com.sap.db.jdbc.Driver",
-        "hdi_password": "Zq3A2bYDvTTquAO1JQrqL6IxH_NvKplkK6P7_3nE7PAPVHUqPMdT-NfNtuTem79NBBz6IbN7S2mDI40zBvk7f5djl7hWQ1JX-N5_RQ.XmWWdM8Ob1N8YlIp89VQy1rYT",
-        "hdi_user": "SBSS_22770975516426628021751188605304042614136173817580603515508746759",
-        "host": "10.253.93.93",
-        "password": "Nv955b-KROpo405lPIw005hjuU7-1B_K1Lv2tDfufS35HIUcWP4kCEgr0eeSL1B1S5NNMsVHYR3C.aMo6uEwcw2YXJ82R.bFStDgMff-5zvEJCw6zp283ckN0ONpgPpZ",
-        "port": "30041",
-        "schema": "HANADBMAG",
-        "url": "jdbc:sap://10.253.93.93:30041/?currentschema=HANADBMAG",
-        "user": "SBSS_38631422732122048439525506905104725684415789813382313401369111761"
-       },
-       "instance_name": "lev_hdi",
-       "label": "hanatrial",
-       "name": "lev_hdi",
-       "plan": "hdi-shared",
-       "provider": null,
-       "syslog_drain_url": null,
-       "tags": [
-        "hana",
-        "database",
-        "relational"
-       ],
-       "volume_mounts": []
-      }
+        {
+            "label": "hana",
+            "provider": null,
+            "plan": "hdi-shared",
+            "name": "shared_hdi",
+            "tags": [
+              "hana",
+              "database",
+              "relational"
+            ],
+            "instance_name": "shared_hdi",
+            "binding_name": null,
+            "credentials": {
+              "host": "zeus.hana.prod.eu-central-1.whitney.dbaas.ondemand.com",
+              "port": "21513",
+              "encrypt": true,
+              "sslValidateCertificate": false,
+              "driver": "com.sap.db.jdbc.Driver",
+              "url": "jdbc:sap://zeus.hana.prod.eu-central-1.whitney.dbaas.ondemand.com:21513?encrypt=true&validateCertificate=false&currentschema=SHARED",
+              "schema": "SHARED",
+              "hdi_user": "SHARED_CBJPD5ZEY2VWMI2TMU60N5KLH_DT",
+              "hdi_password": "Xo1EIbTesySzHTSrzclc2oSsEA6MtIm89fBYN9zajxqfK0v88Rerhb-Az8jOioO6.Bv4Vr7JzQrQtyasZZaf.ykgNrnwBI1qZQk6IVolNfkLIj2n.y.kgCpDk-1ongR1",
+              "user": "SHARED_CBJPD5ZEY2VWMI2TMU60N5KLH_RT",
+              "password": "Tk9t.8bpaTPELse31B9_0V4D6aZ_2wUN7tlt27KG7OE9EF56uD3qUH-wAmg_s4QA-9bnvUoM-0NlTc-OnpLG3081H2UipQbnSAJuC6-voTcj0kNmWlBp3pw_ihrNK8z."
+            },
+            "syslog_drain_url": null,
+            "volume_mounts": []
+        }
      ],
      "xsuaa": [
       {
@@ -58,5 +60,5 @@
       }
      ]
     }
-   }
+}
    

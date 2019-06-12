@@ -3,49 +3,51 @@
 "use strict";
 
 const dbClass = require(global.__base + "utils/dbClass");
+const helper = require(global.__base + "utils/Helper");
 const hdbext = require("@sap/hdbext");
 
 const addWhereClause = (req, aWhere) => {
     req.query.SELECT.where = req.query.SELECT.where ?
-        req.query.SELECT.where.concat(["and"]).concat(aWhere) :
-        aWhere;
-
+        req.query.SELECT.where.concat(["and"]).concat(aWhere) : aWhere;
 };
-const getCompanyClause = sCompany => [{ref: ["mandt"]}, "=", {val: sCompany}];
-const getLangClause = sLang => [{ref: ["lang"]}, "=", {val: sLang}];
+
+const getCurrencyClause = sCurrency => [{ref: ["name"]}, "=", {val: sCompany}];
+const getDateClause = sDate => [{ref: ["date"]}, "=", {val: sLang}];
 
 module.exports = function () {
     this.before("READ", req => {
         req.log.debug(`BEFORE_READ ${req.target["@Common.Label"]}`);
 
-        //restrict by mandt
-        // addWhereClause(req, getCompanyClause("LeverX"));
+        //restrict by currency
+        addWhereClause(req, getCurrencyClause("EUR"));
 
-        //restrict by lang
-        // addWhereClause(req, getLangClause("EN"));
+        //restrict by date
+        let today = date.toDateString().replace(/\s+/g, '-');
+        addWhereClause(req, getDateClause(today));
+        req.log.debug(req.body);
     });
 
-    this.on("CREATE", "Users", async (User) => {
+    this.on("CREATE", "Log", async (Log) => {
         req.log.debug(`ON CREATE ${req.target["@Common.Label"]}`);
 
         const {
             data
-        } = User;
+        } = Log;
         if (data.length < 1) {
             return null;
-        }
+        } 
 
-        const dbClass = require(global.__base + "utils/dbPromises");
         var client = await dbClass.createConnection();
         let db = new dbClass(client);
 
-        if (!data.USID) {
-            data.USID = await db.getNextval("usid");
-//		throw new Error(`Invalid email for ${data.FIRSTNAME}. No Way! E-Mail must be valid and ${data.EMAIL} has problems`);
+        if (!data.loid) {
+            data.loid = await db.getNextval("loid");
         }
-
-        const sSql = `INSERT INTO "USER" VALUES(?,?)`
-        const aValues = [oUser.usid, oUser.name];
+        data.text = "Newest courses were added";
+        const oLog = helper._prepareObject(data, "AutoBot");
+              oLog.text = data.text;
+        const sSql = `INSERT INTO "LOG" VALUES(?,?,?,?)`
+        const aValues = [data.loid, data.text, data.createdby, data.createdon];
 
         req.log.debug(aValues);
         req.log.debug(sSql);
@@ -54,12 +56,10 @@ module.exports = function () {
         return data;
     });
 
-
-    this.after("READ", "Users", (entity) => {
+    this.after("READ", "Log", (entity) => {
         if (entity.length > 0) {
-            // entity.forEach(item => item.mandt = "");
             entity.forEach(item => item.name = "");
+            entity.forEach(item => item.date = "");
         }
     });
-
 };
