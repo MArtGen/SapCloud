@@ -15,14 +15,14 @@ modules:
             - {name: lev_deployer}
         build-parameters:
             ignore: [".git/", ".idea/", ".gitignore", ".gitlab-ci.yml", "mta.jar", "mta.yaml"]
-            requires: [{name: html5app, artifacts: ['./*'], target-path: resources/html5app}]
+            requires: [{name: user_create, artifacts: ['./*'], target-path: resources/user_create}]
         parameters:
             disk-quota: 256M
             memory: 128M
     -
-        name: html5app
+        name: user_create
         type: html5
-        path: apps/html5app
+        path: apps/user_create
         build-parameters:
             ignore: [".git/", ".idea/", ".gitignore", ".gitlab-ci.yml", "mta.jar", "mta.yaml"]
             builder: grunt

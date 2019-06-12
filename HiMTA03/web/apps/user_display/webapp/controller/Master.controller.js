@@ -1,11 +1,11 @@
 sap.ui.define([
-    "user_create/controller/BaseController",
+    "user_display/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox"
 ], function (BaseController, JSONModel) {
     "use strict";
 
-    return BaseController.extend("user_create.controller.Main", {
+    return BaseController.extend("user_display.controller.Main", {
         onInit: function () {
             //For local development. Start your NodeJS server.
             // this.host = "http://localhost:3000";
@@ -14,13 +14,8 @@ sap.ui.define([
             //For directly NodeJS. So request will be sent directly to NodeJS in cloud (replace with your uri)
             //this.host = "https://p2001017289trial-trial-dev-lev-srv.cfapps.eu10.hana.ondemand.com";
 
-            this.oDataModel = new JSONModel({
-                toAddress: {}
-            });
-            this.getView().setModel(this.oDataModel, "data");
+            this.getView().setModel(this.getOwnerComponent().getModel());
         },
-
-
         onSave: function(){
             var oData = this.oDataModel.getData();
 
@@ -36,16 +31,15 @@ sap.ui.define([
                     this.oDataModel.setData(data);
                     this.getApp().setBusy(false);
                 }.bind(this),
-                error: function(oError) {
+                error: function(oError){
                     this.getApp().setBusy(false);
                     jQuery.sap.log.error(oError);
                     sap.m.MessageBox.error("Creating failed");
                 }.bind(this)
             });
         },
-
         onCancel: function(){
             this.oDataModel.setData();
-        }     
+        }
     });
 });
