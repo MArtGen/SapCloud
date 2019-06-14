@@ -50,14 +50,14 @@ let hanaOptions = {
         host: "zeus.hana.prod.eu-central-1.whitney.dbaas.ondemand.com",
         port: "21513",
         encrypt: true,
-        sslValidateCertificate: true,
+        sslValidateCertificate: false,
         driver: "com.sap.db.jdbc.Driver",
-        url: "jdbc:sap://zeus.hana.prod.eu-central-1.whitney.dbaas.ondemand.com:21513?encrypt=true&validateCertificate=true&currentschema=PT",
-        schema: "LEV_SCP",
-        hdi_user: "LEV_SCP_4M6D3274UZJZ6PAOMLLV7NSDR_DT",
-        hdi_password: "Ge2bxXyrH9swPc4qEpcfZt2gC_qF04IJwsiMzglcYYeVXlMkstKjZCEB7-f.2GLXa8mFW8Sr2Y0vRym0S4pxjzElkkGLMV2d3LXwGJS6VT8mOX6XUXS-MLbClxn_raAA",
-        user: "LEV_SCP_4M6D3274UZJZ6PAOMLLV7NSDR_RT",
-        password: "Vs2puzLB3tCODJD5MVtOs0jgnorTmQclpnxin57OQt0NnkaZgIrxJJ-XzWKC5E4b3h1V7qV0q4rLESeASxw063MUeztHDU1goZZvKojUf.nwQ63vAbxtOkKvJx-jbRQl"
+        url: "jdbc:sap://zeus.hana.prod.eu-central-1.whitney.dbaas.ondemand.com:21513?encrypt=true&validateCertificate=false&currentschema=SHARED",
+        schema: "SHARED",
+        hdi_user: "SHARED_CBJPD5ZEY2VWMI2TMU60N5KLH_DT",
+        hdi_password: "Xo1EIbTesySzHTSrzclc2oSsEA6MtIm89fBYN9zajxqfK0v88Rerhb-Az8jOioO6.Bv4Vr7JzQrQtyasZZaf.ykgNrnwBI1qZQk6IVolNfkLIj2n.y.kgCpDk-1ongR1",
+        user: "SHARED_CBJPD5ZEY2VWMI2TMU60N5KLH_RT",
+        password: "Tk9t.8bpaTPELse31B9_0V4D6aZ_2wUN7tlt27KG7OE9EF56uD3qUH-wAmg_s4QA-9bnvUoM-0NlTc-OnpLG3081H2UipQbnSAJuC6-voTcj0kNmWlBp3pw_ihrNK8z."
     }
 };
 
@@ -77,7 +77,7 @@ cds
         crashOnError: false
     })
     .at("/odata/")
-    .with(require("./router/odata.js"))
+/*     .with(require("./router/odata.js")) */
     .in(app)
     .catch(err => {
         // do not crash on error

@@ -6,8 +6,8 @@ using BankCurrency as _BankCurrency from '../db/ExtraInfo';
 
 service odata {
 
-  entity Bank @(
-		title: 'Bank',
+  entity bank @(
+		title: 'bank',
 		Capabilities: {
 			InsertRestrictions: {Insertable: false},
 			UpdateRestrictions: {Updatable: false},
@@ -15,8 +15,8 @@ service odata {
 		}
 	) as projection on _Bank;
 
-	  entity BankCurrency @(
-		title: 'BankCurrency',
+	  entity bankCurrency @(
+		title: 'bankCurrency',
 		Capabilities: {
 			InsertRestrictions: {Insertable: false},
 			UpdateRestrictions: {Updatable: false},
@@ -24,8 +24,8 @@ service odata {
 		}
 	) as projection on _BankCurrency;
 
-  entity Currency @(
-		title: 'Currency',
+  entity currency @(
+		title: 'currency',
 		Capabilities: {
 			InsertRestrictions: {Insertable: false},
 			UpdateRestrictions: {Updatable: false},
@@ -33,8 +33,8 @@ service odata {
 		}
 	) as projection on _Currency;
 
-    entity Course @(
-		title: 'Course',
+    entity course @(
+		title: 'course',
 		Capabilities: {
 			InsertRestrictions: {Insertable: false},
 			UpdateRestrictions: {Updatable: false},
@@ -42,8 +42,8 @@ service odata {
 		}
 	) as projection on _Course;
 
-		entity Log @(
-		title: 'Log',
+		entity log @(
+		title: 'log',
 		Capabilities: {
 			InsertRestrictions: {Insertable: false},
 			UpdateRestrictions: {Updatable: false},

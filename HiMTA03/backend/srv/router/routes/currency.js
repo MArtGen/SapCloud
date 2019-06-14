@@ -58,7 +58,7 @@ module.exports = () => {
 
             const db = new dbClass(req.db);
 
-            const oCur = helper._prepareObject(req.body, "MAG");
+            const oCur = helper._prepareObject(req.body, req.body.createdby);
 				  oCur.cuid = await db.getNextval("cuid");
 
             const sSql = "INSERT INTO \"CURRENCY\" VALUES(?, ?, ?, ?)";
@@ -68,7 +68,7 @@ module.exports = () => {
 
             res.type("application/json").status(201).send(JSON.stringify(oCur));
         } catch (e) {
-            helper.AddToLog(e.message, "DefaultUser");
+            helper.AddToLog(e.message, req.body.createdby);
             next(e);
         }
     });
@@ -78,11 +78,11 @@ module.exports = () => {
         logger.info('Currency put request');
 
         try {
-            helper.AddToLog("Currency PUT Works.", "DefaultUser");
+            helper.AddToLog("Currency PUT Works.", req.body.createdby);
 
             const db = new dbClass(req.db);
 
-            const oCur = helper._prepareObject(req.body, "MAG");
+            const oCur = helper._prepareObject(req.body, req.body.createdby);
             const sSql = "UPDATE \"CURRENCY\" SET \"NAME\" = ?, \"CREATEDBY\" = ?, \"CREATEDON\" = ? WHERE \"CUID\" = ?";
 						const aValues = [ oCur.name, oCur.createdby, oCur.createdon, oCur.cuid ];
 
@@ -90,7 +90,7 @@ module.exports = () => {
 
             res.type("application/json").status(200).send(JSON.stringify(oCur));
         } catch (e) {
-            helper.AddToLog(e.message, "DefaultUser");
+            helper.AddToLog(e.message, req.body.createdby);
             next(e);
         }
     });

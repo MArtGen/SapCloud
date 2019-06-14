@@ -1,7 +1,7 @@
 {
   "_version": "1.8.0",
   "sap.app": {
-    "id": "user_create",
+    "id": "cur_create",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -36,7 +36,7 @@
   },
   "sap.ui5": {
     "rootView": {
-      "viewName": "user_create.view.App",
+      "viewName": "cur_create.view.App",
       "type": "XML"
     },
     "dependencies": {
@@ -59,7 +59,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "user_create.i18n.i18n"
+          "bundleName": "cur_create.i18n.i18n"
         }
       }
     },
@@ -76,7 +76,7 @@
         "viewType": "XML",
         "controlId": "app",
         "controlAggregation": "pages",
-        "viewPath": "user_create.view",
+        "viewPath": "cur_create.view",
         "bypassed": {
           "target": "NotFound"
         }

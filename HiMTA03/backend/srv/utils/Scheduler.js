@@ -40,8 +40,8 @@ module.exports = {
                     let iSql = "INSERT INTO \"COURSE\" VALUES(?, ?, ?, ?, ?, ?)";
                     let aValues = [ oCourse.coid, oCourse.cuid, oCourse.date, oCourse.value, oCourse.createdby, oCourse.createdon ];
                     db.executeUpdate(iSql, aValues); })
+                .catch(e => console.log(e.message))
                 .then(() => { helper.AddToLog("New course for " + result[i].NAME + " was added.", "Scheduler"); })
-                .catch(e => console.log(e.message));
             };
         } catch (e) {
             helper.AddToLog("Error of Scheduler: " + e.message, "Scheduler");

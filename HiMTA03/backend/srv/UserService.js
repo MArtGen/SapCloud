@@ -1,13 +1,13 @@
 //MOCK service
 module.exports = (srv) => {
 
-    srv.on('READ', 'Bank', () => [
+    srv.on('READ', 'bank', () => [
         {
             bid: 1000, name: "NacBankRB", createdby: "MAG", createdon: "30.05.2019"
         }
     ]);
 
-    srv.on('READ', 'Currency', () => [
+    srv.on('READ', 'currency', () => [
         { 
             cuid: 1000, name: "EUR", createdby: "MAG", createdon: "30.05.2019",
             toCourse: [
@@ -17,7 +17,7 @@ module.exports = (srv) => {
         }
     ]);
 
-    srv.on('READ', 'BankCurrency', () => [
+    srv.on('READ', 'bankCurrency', () => [
         {
             bid: 1000, cuid: 1000, createdby: "MAG", createdon: "30.05.2019",
             toCurrency: [
@@ -29,13 +29,13 @@ module.exports = (srv) => {
         }
     ]);
 
-    srv.on('READ', 'Course', () => [
+    srv.on('READ', 'course', () => [
         {
             coid: 1000, cuid: 1000, date: "30.05.2019", value: "2.3330", createdby: "MAG", createdon: "30.05.2019"
         }
     ]);
 
-    srv.on('READ', 'Log', () => [
+    srv.on('READ', 'log', () => [
         {
             loid: 1000, text: "First log", createdby: "MAG", createdon: "30.05.2019" }
     ]);

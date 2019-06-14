@@ -49,10 +49,10 @@ module.exports = () => {
         logger.info('Bank post request');
 
         try {
-            helper.AddToLog("Bank POST Works", "DefaultUser");
+            helper.AddToLog("Bank POST Works", req.body.createdby);
 
             const db = new dbClass(req.db);
-            const oBank = helper._prepareObject(req.body, "MAG");
+            const oBank = helper._prepareObject(req.body, req.body.createdby);
 				  oBank.bid = await db.getNextval("bid");
 
             const sSql = "INSERT INTO \"BANK\" VALUES(?, ?, ?, ?)";
@@ -62,7 +62,7 @@ module.exports = () => {
 
             res.type("application/json").status(201).send(JSON.stringify(oBank));
         } catch (e) {
-            helper.AddToLog(e.message, "DefaultUser");
+            helper.AddToLog(e.message, req.body.createdby);
             next(e);
         }
     });
@@ -72,11 +72,11 @@ module.exports = () => {
         logger.info('Bank put request');
 
         try {
-            helper.AddToLog("Bank PUT Works", "DefaultUser");
+            helper.AddToLog("Bank PUT Works", req.body.createdby);
 
             const db = new dbClass(req.db);
 
-            const oBank = helper._prepareObject(req.body, "MAG");
+            const oBank = helper._prepareObject(req.body, req.body.createdby);
             const sSql = "UPDATE \"BANK\" SET \"NAME\" = ?, \"CREATEDBY\" = ?, \"CREATEDON\" = ? WHERE \"BID\" = ?";
 						const aValues = [ oBank.name, oBank.createdby, oBank.createdon, oBank.bid ];
 
@@ -84,7 +84,7 @@ module.exports = () => {
 
             res.type("application/json").status(200).send(JSON.stringify(oBank));
         } catch (e) {
-            helper.AddToLog(e.message, "DefaultUser");
+            helper.AddToLog(e.message, req.body.createdby);
             next(e);
         }
     });

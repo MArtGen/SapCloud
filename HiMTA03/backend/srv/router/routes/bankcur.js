@@ -68,11 +68,11 @@ module.exports = () => {
         logger.info('BankCur put request');
 
         try {
-            helper.AddToLog("BankCur PUT Works.", "DefaultUser");
+            helper.AddToLog("BankCur PUT Works.", req.body.createdby);
 
             const db = new dbClass(req.db);
 
-            const oBC = helper._prepareObject(req.body, "MAG");
+            const oBC = helper._prepareObject(req.body, req.body.createdby);
 
             const sSql = "INSERT INTO \"BANKCURRENCY\" VALUES(?, ?, ?, ?)";
             const aValues = [ oBC.bid, oBC.cuid, oBC.createdby, oBC.createdon ];
@@ -81,7 +81,7 @@ module.exports = () => {
 
             res.type("application/json").status(201).send(JSON.stringify(oBC));
         } catch (e) {
-            helper.AddToLog(e.message, "DefaultUser");
+            helper.AddToLog(e.message, req.body.createdby);
             next(e);
         }
     });

@@ -3,7 +3,7 @@ sap.ui.define([
 ], function (Controller) {
     "use strict";
 
-    return Controller.extend("user_create.controller.BaseController", {
+    return Controller.extend("cur_create.controller.BaseController", {
         getApp: function () {
             return this.getView().getParent();
         }

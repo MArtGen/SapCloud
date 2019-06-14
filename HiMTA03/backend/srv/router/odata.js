@@ -11,8 +11,8 @@ const addWhereClause = (req, aWhere) => {
         req.query.SELECT.where.concat(["and"]).concat(aWhere) : aWhere;
 };
 
-const getCurrencyClause = sCurrency => [{ref: ["name"]}, "=", {val: sCompany}];
-const getDateClause = sDate => [{ref: ["date"]}, "=", {val: sLang}];
+const getCurrencyClause = sCurrency => [{ref: ["name"]}, "=", {val: sCurrency}];
+const getDateClause = sDate => [{ref: ["date"]}, "=", {val: sDate}];
 
 module.exports = function () {
     this.before("READ", req => {
@@ -22,6 +22,7 @@ module.exports = function () {
         addWhereClause(req, getCurrencyClause("EUR"));
 
         //restrict by date
+        let date = new Date();
         let today = date.toDateString().replace(/\s+/g, '-');
         addWhereClause(req, getDateClause(today));
         req.log.debug(req.body);

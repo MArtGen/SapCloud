@@ -1,7 +1,7 @@
 {
   "_version": "1.8.0",
   "sap.app": {
-    "id": "user_display",
+    "id": "cur_display",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -15,7 +15,7 @@
     },
     "dataSources": {
       "odata": {
-        "uri": "/../api/odata/",
+            "uri": "/../api/odata/",
         "type": "OData",
         "settings": {
           "odataVersion": "4.0"
@@ -52,7 +52,7 @@
   },
   "sap.ui5": {
     "rootView": {
-      "viewName": "user_display.view.App",
+      "viewName": "cur_display.view.App",
       "type": "XML"
     },
     "dependencies": {
@@ -75,7 +75,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "user_display.i18n.i18n"
+          "bundleName": "cur_display.i18n.i18n"
         }
       },
       "": {
@@ -100,7 +100,7 @@
         "viewType": "XML",
         "controlId": "app",
         "controlAggregation": "pages",
-        "viewPath": "user_display.view",
+        "viewPath": "cur_display.view",
         "bypassed": {
           "target": "NotFound"
         }

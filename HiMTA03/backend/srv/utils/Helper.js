@@ -6,7 +6,8 @@ const dbClass = require(global.__base + "utils/dbClass");
 
 function _prepareObject(oVal, createdby) {
     let date = new Date();
-    oVal.createdby = createdby;
+    if (createdby !== undefined) oVal.createdby = createdby;
+    else oVal.createdby = "DefaultUser";
     oVal.createdon = date.toDateString().replace(/\s+/g,'-') + ' ' + 
                      date.getHours() + ':' +
                      date.getMinutes() + ':' +
