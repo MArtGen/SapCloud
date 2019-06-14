@@ -4,7 +4,7 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     controllerName="cur_display.controller.Master">
-    <Page showHeader="false">
+    <Page title="MyApp">
         <Table
             id="CurrencyTable"
             busyIndicatorDelay="0"
@@ -15,7 +15,7 @@
             width="auto">
             <headerToolbar>
                 <Toolbar>
-                    <Title id="idCountTitle"/>
+                    <Title id="idCountTitle1" text="{i18n>CURRENCY}"/>
                     <ToolbarSpacer/>
                     <Button
                         icon="sap-icon://action-settings"
@@ -42,6 +42,53 @@
                     <cells>
                         <Text text="{cuid}"/>
                         <Text text="{name}"/>
+                        <Text text="{createdby}"/>
+                        <Text text="{createdon}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <Table
+            id="CourseTable"
+            busyIndicatorDelay="0"
+            growing="true"
+            growingScrollToLoad="true"
+            noDataText="{i18n>tableNoDataText}"
+            items="{/course}"
+            width="auto">
+            <headerToolbar>
+                <Toolbar>
+                    <Title id="idCountTitle2" text="{i18n>COURSES}"/>
+                    <ToolbarSpacer/>
+                </Toolbar>
+            </headerToolbar>
+            <columns>
+                <Column width="20%">
+                    <Label text="{i18n>CUID}" design="Bold"/>
+                </Column>
+                <Column>
+                    <Label text="{i18n>COID}" design="Bold"/>
+                </Column>
+                <Column>
+                    <Label text="{i18n>DATE}" design="Bold"/>
+                </Column>
+                <Column>
+                    <Label text="{i18n>VALUE}" design="Bold"/>
+                </Column>
+                <Column>
+                    <Label text="{i18n>CREATEDBY}" design="Bold"/>
+                </Column>
+                <Column>
+                    <Label text="{i18n>CREATEDON}" design="Bold"/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onGoToDetail">
+                    <cells>
+                        <Text text="{cuid}"/>
+                        <Text text="{coid}"/>
+                        <Text text="{date}"/>
+                        <Text text="{value}"/>
                         <Text text="{createdby}"/>
                         <Text text="{createdon}"/>
                     </cells>

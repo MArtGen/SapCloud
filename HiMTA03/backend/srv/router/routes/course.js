@@ -55,7 +55,7 @@ module.exports = () => {
 
             const db = new dbClass(req.db);
 
-            const courId = [ req.query.coid ];
+            const courId = [ req.query.cuid ];
             const sSql = 'SELECT * FROM \"COURSE\" WHERE "CUID" = ? ORDER BY "COID" DESC LIMIT 1';
             var result = await db.executeUpdate(sSql, courId);
 

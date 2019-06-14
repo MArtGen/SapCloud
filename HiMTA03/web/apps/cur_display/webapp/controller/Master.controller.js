@@ -26,7 +26,23 @@ sap.ui.define([
                 }.bind(this),
                 error: function(oError){
                     jQuery.sap.log.error(oError);
-                    sap.m.MessageBox.error("Error of reading");
+                    sap.m.MessageBox.error("Error of reading CURRENCY");
+                }.bind(this)
+            });
+
+            jQuery.ajax({
+                type: "GET",
+                url: this.host + "/course",
+                dataType: "json",
+                contentType: "application/json",
+                success: function(data){
+                    var oModel = new JSONModel(data);
+                    var oTable = this.byId("CourseTable");
+                    oTable.setModel(oModel, "oData");
+                }.bind(this),
+                error: function(oError){
+                    jQuery.sap.log.error(oError);
+                    sap.m.MessageBox.error("Error of reading COURSE");
                 }.bind(this)
             });
         }
