@@ -4,6 +4,7 @@
 
 const express = require("express");
 const cloudServices = require(global.__base + "utils/cloudServices");
+const COMMON = require(global.__base + "utils/common");
 
 module.exports = () => {
     const app = express.Router();
@@ -13,6 +14,7 @@ module.exports = () => {
         const logger = req.loggingContext.getLogger("/Application");
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             logger.info('Getting onPremise systems');
             let aOnPremiseSystems = await cloudServices.getOnPremiseSystems();
             logger.info('onPremise systems received');
@@ -33,6 +35,7 @@ module.exports = () => {
         const logger = req.loggingContext.getLogger("/Application");
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             const syid = req.params.syid;
 
             logger.info('Getting onPremise system');
@@ -59,6 +62,7 @@ module.exports = () => {
 		//-----------------GET DATA FROM On-Premise System---------------
     app.get("/data/:syid", async (req, res, next) => {
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
 	  			const logger = req.loggingContext.getLogger("/Application");
 
     			logger.info('Getting onPremise system');

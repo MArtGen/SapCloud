@@ -28,7 +28,25 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "intent1": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "cur_create",
+          "action": "manage"
+        }
+      }
     }
+  },
+  "sap.platform.cf": {
+    "oAuthScopes": [
+      "HiMTAmag!t15321.himta.view",
+      "HiMTAmag!t15321.himta.edit"
+    ]
   },
   "sap.ui": {
     "technology": "UI5",

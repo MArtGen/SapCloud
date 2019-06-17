@@ -5,6 +5,7 @@
 const express = require("express");
 const dbClass = require(global.__base + "utils/dbClass");
 const helper = require(global.__base + "utils/Helper");
+const COMMON = require(global.__base + "utils/common");
 
 module.exports = () => {
     const app = express.Router();
@@ -14,6 +15,7 @@ module.exports = () => {
         logger.info('Bank get <select_all> request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Bank Get Works. <select_all>", "DefaultUser");
 
             const db = new dbClass(req.db);
@@ -31,6 +33,7 @@ module.exports = () => {
         logger.info('Bank get <select_by_name> request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Bank Get Works. <select_by_name>", "DefaultUser");
             
             const db = new dbClass(req.db);
@@ -49,10 +52,11 @@ module.exports = () => {
         logger.info('Bank post request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Bank POST Works", req.body.createdby);
 
             const db = new dbClass(req.db);
-            const oBank = helper._prepareObject(req.body, req.body.createdby);
+            const oBank = helper._prepareObject(req.body, req);
 				  oBank.bid = await db.getNextval("bid");
 
             const sSql = "INSERT INTO \"BANK\" VALUES(?, ?, ?, ?)";
@@ -72,11 +76,12 @@ module.exports = () => {
         logger.info('Bank put request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Bank PUT Works", req.body.createdby);
 
             const db = new dbClass(req.db);
 
-            const oBank = helper._prepareObject(req.body, req.body.createdby);
+            const oBank = helper._prepareObject(req.body, req);
             const sSql = "UPDATE \"BANK\" SET \"NAME\" = ?, \"CREATEDBY\" = ?, \"CREATEDON\" = ? WHERE \"BID\" = ?";
 						const aValues = [ oBank.name, oBank.createdby, oBank.createdon, oBank.bid ];
 

@@ -5,6 +5,7 @@
 const express = require("express");
 const dbClass = require(global.__base + "utils/dbClass");
 const helper = require(global.__base + "utils/Helper");
+const COMMON = require(global.__base + "utils/common");
 
 module.exports = () => {
     const app = express.Router();
@@ -16,6 +17,7 @@ module.exports = () => {
         tracer.entering("/currency", req, res); */
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
 /*             tracer.exiting("/currency", "Currency GET Works. <select_all>"); */
             helper.AddToLog("Currency GET Works. <select_all>", "DefaultUser");
 
@@ -35,6 +37,7 @@ module.exports = () => {
         logger.info('Currency get <select_by_name> request');
             
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Currency GET Works. <select_by_name>", "DefaultUser");
 
             const db = new dbClass(req.db);
@@ -54,11 +57,12 @@ module.exports = () => {
         logger.info('Currency post request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Currency POST Works.", "DefaultUser");
 
             const db = new dbClass(req.db);
 
-            const oCur = helper._prepareObject(req.body, req.body.createdby);
+            const oCur = helper._prepareObject(req.body, req);
 				  oCur.cuid = await db.getNextval("cuid");
 
             const sSql = "INSERT INTO \"CURRENCY\" VALUES(?, ?, ?, ?)";
@@ -78,11 +82,12 @@ module.exports = () => {
         logger.info('Currency put request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Currency PUT Works.", req.body.createdby);
 
             const db = new dbClass(req.db);
 
-            const oCur = helper._prepareObject(req.body, req.body.createdby);
+            const oCur = helper._prepareObject(req.body, req);
             const sSql = "UPDATE \"CURRENCY\" SET \"NAME\" = ?, \"CREATEDBY\" = ?, \"CREATEDON\" = ? WHERE \"CUID\" = ?";
 						const aValues = [ oCur.name, oCur.createdby, oCur.createdon, oCur.cuid ];
 

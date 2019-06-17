@@ -78,23 +78,25 @@ Caused by: java.io.IOException: CreateProcess error=2, The system cannot find th
 	... 69 more
 [main] INFO com.sap.di.ext.mta.proc.DescriptorProcessorImpl - MTA manifest processing on 7 threads
 [main] INFO com.sap.di.ext.mta.cli.CliExecutor - arguments: [--build-target=CF, build]
-[main] INFO com.sap.di.ext.mta.cli.CliExecutor - Archive path is D:\SapCloud\SapCloud\himta03\resources\resources.mtar
+[main] INFO com.sap.di.ext.mta.cli.CliExecutor - Archive path is D:\SapCloud\SapCloud\HiMTA03\resources\resources.mtar
 [main] DEBUG com.sap.di.ext.mta.cli.CliBuildExecutor - Starting MTA build
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.DesignDescriptor$$impl0 for bean interface com.sap.di.ext.mta.dto.DesignDescriptor
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.Resource$$impl1 for bean interface com.sap.di.ext.mta.dto.Resource
 [main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Processing MTA lev_resources
 [main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources
-[main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: created 6 verification tasks
-[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_hdi]
-[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_router]
-[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_conn]
+[main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: created 7 verification tasks
 [pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_deployer]
-[pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_dest]
-[pool-1-thread-6] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_uaa]
-[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_router]
-[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_conn]
-[pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_dest]
-[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_hdi]
+[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_conn]
+[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_router]
 [pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_deployer]
+[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_hdi]
+[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_hdi]
+[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_conn]
+[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_router]
+[pool-1-thread-7] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_portal]
+[pool-1-thread-6] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_uaa]
+[pool-1-thread-7] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_portal]
+[pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: started symbol resource[lev_dest]
+[pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_dest]
 [pool-1-thread-6] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_resources: finished symbol resource[lev_uaa]
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.DeploymentDescriptor$$impl2 for bean interface com.sap.di.ext.mta.dto.DeploymentDescriptor

@@ -5,6 +5,7 @@
 const express = require("express");
 const dbClass = require(global.__base + "utils/dbClass");
 const helper = require(global.__base + "utils/Helper");
+const COMMON = require(global.__base + "utils/common");
 
 module.exports = () => {
     const app = express.Router();
@@ -14,6 +15,7 @@ module.exports = () => {
         logger.info('Course get <select_all> request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Course GET Works. <select_all>", "DefaultUser");
 
             const db = new dbClass(req.db);
@@ -31,6 +33,7 @@ module.exports = () => {
         logger.info('Course get <select_by_coid> request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Course GET Works. <select_by_coid>", "DefaultUser");
 
             const db = new dbClass(req.db);
@@ -51,6 +54,7 @@ module.exports = () => {
         logger.info('Course get <select_by_maxid> request');
 
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Course GET Works. <select_by_maxid>", "DefaultUser");
 
             const db = new dbClass(req.db);

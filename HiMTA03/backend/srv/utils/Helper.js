@@ -3,11 +3,12 @@
 "use strict";
 
 const dbClass = require(global.__base + "utils/dbClass");
+const COMMON = require(global.__base + "utils/common");
 
-function _prepareObject(oVal, createdby) {
+function _prepareObject(oVal, req) {
     let date = new Date();
-    if (createdby !== undefined) oVal.createdby = createdby;
-    else oVal.createdby = "DefaultUser";
+    const user = COMMON.getAjaxUser(req);
+    oVal.createdby = user;
     oVal.createdon = date.toDateString().replace(/\s+/g,'-') + ' ' + 
                      date.getHours() + ':' +
                      date.getMinutes() + ':' +

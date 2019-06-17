@@ -5,35 +5,32 @@
 const dbClass = require(global.__base + "utils/dbClass");
 const helper = require(global.__base + "utils/Helper");
 const hdbext = require("@sap/hdbext");
+const COMMON = require(global.__base + "utils/common");
 
 const addWhereClause = (req, aWhere) => {
     req.query.SELECT.where = req.query.SELECT.where ?
         req.query.SELECT.where.concat(["and"]).concat(aWhere) : aWhere;
 };
 
-const getCurrencyClause = sCurrency => [{ref: ["name"]}, "=", {val: sCurrency}];
-const getDateClause = sDate => [{ref: ["date"]}, "=", {val: sDate}];
+const getCreatedByClause = sCreatedBy => [{ref: ["createdby"]}, "=", {val: sCreatedBy}];
 
 module.exports = function () {
     this.before("READ", req => {
         req.log.debug(`BEFORE_READ ${req.target["@Common.Label"]}`);
 
-        //restrict by currency
-        addWhereClause(req, getCurrencyClause("EUR"));
+        //restrict by createdby
+        addWhereClause(req, getCreatedByClause("Scheduler"));
 
-        //restrict by date
-        let date = new Date();
-        let today = date.toDateString().replace(/\s+/g, '-');
-        addWhereClause(req, getDateClause(today));
         req.log.debug(req.body);
     });
 
-    this.on("CREATE", "Log", async (Log) => {
+    this.on("CREATE", "log", async (log) => {
+        COMMON.checkOdataAuth(req, "himta.edit");
         req.log.debug(`ON CREATE ${req.target["@Common.Label"]}`);
 
         const {
             data
-        } = Log;
+        } = log;
         if (data.length < 1) {
             return null;
         } 
@@ -57,10 +54,9 @@ module.exports = function () {
         return data;
     });
 
-    this.after("READ", "Log", (entity) => {
+    this.after("READ", (entity) => {
         if (entity.length > 0) {
-            entity.forEach(item => item.name = "");
-            entity.forEach(item => item.date = "");
+            entity.forEach(item => item.createdby = "OdataAutoBot");
         }
     });
 };

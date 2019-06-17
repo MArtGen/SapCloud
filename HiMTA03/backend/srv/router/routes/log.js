@@ -5,12 +5,14 @@
 const express = require("express");
 
 const dbClass = require(global.__base + "utils/dbClass");
+const COMMON = require(global.__base + "utils/common");
 
 module.exports = () => {
     const app = express.Router();
 
     app.get("/", async (req, res, next) => {
         try {
+            COMMON.checkAjaxAuth(req, "himta.view");
             const db = new dbClass(req.db);
             const sSql = 'SELECT * FROM \"LOG\"';
             var result = await db.getVal(sSql);
