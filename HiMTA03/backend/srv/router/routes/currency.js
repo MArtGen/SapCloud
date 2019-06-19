@@ -62,7 +62,7 @@ module.exports = () => {
 
             const db = new dbClass(req.db);
 
-            const oCur = helper._prepareObject(req.body, req);
+            const oCur = helper._prepareObject(req.body, req.body.createdby, req);
 				  oCur.cuid = await db.getNextval("cuid");
 
             const sSql = "INSERT INTO \"CURRENCY\" VALUES(?, ?, ?, ?)";
@@ -87,7 +87,7 @@ module.exports = () => {
 
             const db = new dbClass(req.db);
 
-            const oCur = helper._prepareObject(req.body, req);
+            const oCur = helper._prepareObject(req.body, req.body.createdby, req);
             const sSql = "UPDATE \"CURRENCY\" SET \"NAME\" = ?, \"CREATEDBY\" = ?, \"CREATEDON\" = ? WHERE \"CUID\" = ?";
 						const aValues = [ oCur.name, oCur.createdby, oCur.createdon, oCur.cuid ];
 

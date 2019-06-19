@@ -5,10 +5,13 @@
 const dbClass = require(global.__base + "utils/dbClass");
 const COMMON = require(global.__base + "utils/common");
 
-function _prepareObject(oVal, req) {
+function _prepareObject(oVal, createdby, req) {
     let date = new Date();
-    const user = COMMON.getAjaxUser(req);
-    oVal.createdby = user;
+    if (req !== undefined) {
+        const user = COMMON.getAjaxUser(req);
+        oVal.createdby = user;
+    } 
+    else oVal.createdby = createdby;
     oVal.createdon = date.toDateString().replace(/\s+/g,'-') + ' ' + 
                      date.getHours() + ':' +
                      date.getMinutes() + ':' +

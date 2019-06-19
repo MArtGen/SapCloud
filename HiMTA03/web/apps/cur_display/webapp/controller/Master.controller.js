@@ -29,22 +29,48 @@ sap.ui.define([
                     sap.m.MessageBox.error("Error of reading CURRENCY");
                 }.bind(this)
             });
+        },
 
+        onChange: function(oEvent) {
+            var sExpend = oEvent.getParameter("expand");
+            if(sExpend === true) {
+                jQuery.ajax({
+                    type: "GET",
+                    url: this.host + "/course",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function(data){
+                        var oModel = new JSONModel(data);
+                        var oTable = this.byId("CourseTable");
+                        oTable.setModel(oModel, "oData");
+                    }.bind(this),
+                    error: function(oError){
+                        jQuery.sap.log.error(oError);
+                        sap.m.MessageBox.error("Error of reading COURSE");
+                    }.bind(this)
+                });
+            };
+        },
+
+        onCount: function() {
             jQuery.ajax({
                 type: "GET",
-                url: this.host + "/course",
+                url: "http://www.nbrb.by/API/ExRates/Rates/EUR?ParamMode=2",
                 dataType: "json",
                 contentType: "application/json",
                 success: function(data){
-                    var oModel = new JSONModel(data);
-                    var oTable = this.byId("CourseTable");
-                    oTable.setModel(oModel, "oData");
+                    var oInp = this.byId("inputCourse");
+                    var oData = {
+                        count: Number(oInp._lastValue) * data.Cur_OfficialRate
+                    } 
+                    var oModel = new JSONModel(oData);
+                    this.getView().setModel(oModel);
                 }.bind(this),
                 error: function(oError){
                     jQuery.sap.log.error(oError);
-                    sap.m.MessageBox.error("Error of reading COURSE");
+                    sap.m.MessageBox.error("Error of reading COURSE EUR");
                 }.bind(this)
-            });
+            })
         }
     });
 });

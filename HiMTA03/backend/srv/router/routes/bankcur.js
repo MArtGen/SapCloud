@@ -77,7 +77,7 @@ module.exports = () => {
 
             const db = new dbClass(req.db);
 
-            const oBC = helper._prepareObject(req.body, req);
+            const oBC = helper._prepareObject(req.body, req.body.createdby, req);
 
             const sSql = "INSERT INTO \"BANKCURRENCY\" VALUES(?, ?, ?, ?)";
             const aValues = [ oBC.bid, oBC.cuid, oBC.createdby, oBC.createdon ];

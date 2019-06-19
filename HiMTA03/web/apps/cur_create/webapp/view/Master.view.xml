@@ -6,14 +6,14 @@
     controllerName="cur_create.controller.Master">
     <Page showHeader="false">
         <f:SimpleForm
-            title="Currency Create"
+            title="{i18n>currencyCreate}"
             editable="true"
             layout="ResponsiveGridLayout"
             labelSpanXL="12" labelSpanL="12" labelSpanM="12"
             labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
             emptySpanS="0" columnsXL="3" columnsL="3" columnsM="3" singleContainerFullSize="false">
             <f:content>
-                <core:Title text="Currency" />
+                <core:Title text="{i18n>currency}" />
                 <VBox>
                     <Label text="{i18n>cuid}"/>
                     <Input value="{data>/usid}" enabled="false"/>

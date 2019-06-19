@@ -4,7 +4,21 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     controllerName="cur_display.controller.Master">
-    <Page title="MyApp">
+    <Shell>
+    <Page title="{i18n>appName}">
+        <Panel headerText="{i18n>currentcourse}">
+            <content>
+                <Button
+                    text="Count"
+                    press=".onCount"/>  
+                <Input
+                    id="inputCourse"
+                    value="545.42"
+                    description="The Sum (EUR to BEL): {count}"
+                    valueLiveUpdate="true"
+                    width="50%"/>
+            </content>
+        </Panel>
         <Table
             id="CurrencyTable"
             busyIndicatorDelay="0"
@@ -15,26 +29,21 @@
             width="auto">
             <headerToolbar>
                 <Toolbar>
-                    <Title id="idCountTitle1" text="{i18n>CURRENCY}"/>
-                    <ToolbarSpacer/>
-                    <Button
-                        icon="sap-icon://action-settings"
-                        tooltip="{i18n>onSettings}"
-                        press="onSettings"/>
+                    <Title id="idCountTitle1" text="{i18n>currency}"/>
                 </Toolbar>
             </headerToolbar>
             <columns>
                 <Column width="20%">
-                    <Label text="{i18n>CUID}" design="Bold"/>
+                    <Label text="{i18n>cuid}" design="Bold"/>
                 </Column>
                 <Column>
-                    <Label text="{i18n>NAME}" design="Bold"/>
+                    <Label text="{i18n>name}" design="Bold"/>
                 </Column>
                 <Column>
-                    <Label text="{i18n>CREATEDBY}" design="Bold"/>
+                    <Label text="{i18n>createdby}" design="Bold"/>
                 </Column>
                 <Column>
-                    <Label text="{i18n>CREATEDON}" design="Bold"/>
+                    <Label text="{i18n>createdon}" design="Bold"/>
                 </Column>
             </columns>
             <items>
@@ -48,53 +57,49 @@
                 </ColumnListItem>
             </items>
         </Table>
-        <Table
-            id="CourseTable"
-            busyIndicatorDelay="0"
-            growing="true"
-            growingScrollToLoad="true"
-            noDataText="{i18n>tableNoDataText}"
-            items="{/course}"
-            width="auto">
-            <headerToolbar>
-                <Toolbar>
-                    <Title id="idCountTitle2" text="{i18n>COURSES}"/>
-                    <ToolbarSpacer/>
-                </Toolbar>
-            </headerToolbar>
-            <columns>
-                <Column width="20%">
-                    <Label text="{i18n>CUID}" design="Bold"/>
-                </Column>
-                <Column>
-                    <Label text="{i18n>COID}" design="Bold"/>
-                </Column>
-                <Column>
-                    <Label text="{i18n>DATE}" design="Bold"/>
-                </Column>
-                <Column>
-                    <Label text="{i18n>VALUE}" design="Bold"/>
-                </Column>
-                <Column>
-                    <Label text="{i18n>CREATEDBY}" design="Bold"/>
-                </Column>
-                <Column>
-                    <Label text="{i18n>CREATEDON}" design="Bold"/>
-                </Column>
-            </columns>
-            <items>
-                <ColumnListItem type="Navigation" press="onGoToDetail">
-                    <cells>
-                        <Text text="{cuid}"/>
-                        <Text text="{coid}"/>
-                        <Text text="{date}"/>
-                        <Text text="{value}"/>
-                        <Text text="{createdby}"/>
-                        <Text text="{createdon}"/>
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
+        <Panel headerText="{i18n>courses}" expandable="true" expand=".onChange">
+            <Table
+                id="CourseTable"
+                busyIndicatorDelay="0"
+                growing="true"
+                growingScrollToLoad="true"
+                noDataText="{i18n>tableNoDataText}"
+                items="{/course}"
+                width="auto">
+                <columns>
+                    <Column width="20%">
+                        <Label text="{i18n>cuid}" design="Bold"/>
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>coid}" design="Bold"/>
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>date}" design="Bold"/>
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>value}" design="Bold"/>
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>createdby}" design="Bold"/>
+                    </Column>
+                    <Column>
+                        <Label text="{i18n>createdon}" design="Bold"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press="onGoToDetail">
+                        <cells>
+                            <Text text="{cuid}"/>
+                            <Text text="{coid}"/>
+                            <Text text="{date}"/>
+                            <Text text="{value}"/>
+                            <Text text="{createdby}"/>
+                            <Text text="{createdon}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+		</Panel>
     </Page>
-
+    </Shell>
 </mvc:View>
