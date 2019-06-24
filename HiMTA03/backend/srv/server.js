@@ -63,7 +63,7 @@ const hanaOptions = xsenv.getServices({
 }; */
 
 //Build a JWT Strategy from the bound UAA resource
-passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
+/* passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
     uaa: {
         tag: "xsuaa"
     }
@@ -77,7 +77,7 @@ if (!global.DEBUG_MODE) {
             session: false
         })
     );
-}
+} */
 
 hanaOptions.hana.pooling = true;
 app.use(
@@ -95,7 +95,7 @@ cds
         crashOnError: false
     })
     .at("/odata/")
-    .with(require("./router/odata.js"))
+/*     .with(require("./router/odata.js")) */
     .in(app)
     .catch(err => {
         // do not crash on error

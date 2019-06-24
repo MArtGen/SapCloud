@@ -7,16 +7,27 @@
     <Shell>
     <Page title="{i18n>appName}">
         <Panel headerText="{i18n>currentcourse}">
-            <content>
-                <Button
-                    text="Count"
-                    press=".onCount"/>  
+            <content> 
+                <Label text="{i18n>firstPayment}" class="sapUiSmallMargin"/>
                 <Input
-                    id="inputCourse"
-                    value="545.42"
-                    description="The Sum (EUR to BEL): {count}"
+                    id="inputFirstCourse"
+                    value="193.87"
+                    description="The Result (EUR to BEL): {/course} * {/value} = {/count}"
                     valueLiveUpdate="true"
                     width="50%"/>
+                <Text id="firstCourse" text="The Result (EUR to BEL): {/course} * {/value} = {/count}"/>
+                <Label text="{i18n>secondPayment}" class="sapUiSmallMargin"/>
+                <Input
+                    id="inputSecCourse"
+                    value="351.55"
+                    description="The Result (EUR to BEL):{/course} * {/value} = {/count}"
+                    valueLiveUpdate="true"
+                    width="50%"/>
+                <Text id="secondCourse" text="The Result (EUR to BEL): {/course} * {/value} = {/count}"/>
+                <Button
+                    text="{i18n>count}"
+                    press=".onCount"/>
+                <Text id="sum" text="The Sum: {/sum}"/>
             </content>
         </Panel>
         <Table

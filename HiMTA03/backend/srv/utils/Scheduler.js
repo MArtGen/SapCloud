@@ -22,7 +22,7 @@ module.exports = {
                 };
                 let reqBank = new Promise((resolve) => { 
                     let reqOptions = {
-                        url: 'http://www.nbrb.by/API/ExRates/Rates/' + result[i].NAME +'?ParamMode=2',
+                        url: 'https://www.nbrb.by/API/ExRates/Rates/' + result[i].NAME +'?ParamMode=2',
                         method: 'GET'
                     };
                     let res = request(reqOptions);

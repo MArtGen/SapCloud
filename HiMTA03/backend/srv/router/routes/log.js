@@ -12,7 +12,7 @@ module.exports = () => {
 
     app.get("/", async (req, res, next) => {
         try {
-            COMMON.checkAjaxAuth(req, "himta.view");
+            //COMMON.checkAjaxAuth(req, "himta.view");
             const db = new dbClass(req.db);
             const sSql = 'SELECT * FROM \"LOG\"';
             var result = await db.getVal(sSql);

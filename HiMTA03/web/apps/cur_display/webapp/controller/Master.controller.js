@@ -55,16 +55,32 @@ sap.ui.define([
         onCount: function() {
             jQuery.ajax({
                 type: "GET",
-                url: "http://www.nbrb.by/API/ExRates/Rates/EUR?ParamMode=2",
+                url: "/crs/EUR?ParamMode=2",
                 dataType: "json",
                 contentType: "application/json",
                 success: function(data){
-                    var oInp = this.byId("inputCourse");
-                    var oData = {
-                        count: Number(oInp._lastValue) * data.Cur_OfficialRate
-                    } 
-                    var oModel = new JSONModel(oData);
-                    this.getView().setModel(oModel);
+                    var oFInp = this.byId("inputFirstCourse");
+                    var oSInp = this.byId("inputSecCourse");
+                    var fText = this.byId("firstCourse");
+                    var sText = this.byId("secondCourse");
+                    var sum = this.byId("sum");
+                    var oFData = {
+                        count: Number(oFInp._lastValue) * data.Cur_OfficialRate,
+                        course: data.Cur_OfficialRate,
+                        value: Number(oFInp._lastValue)
+                    };
+                    var oSData = {
+                        count: Number(oSInp._lastValue) * data.Cur_OfficialRate,
+                        course: data.Cur_OfficialRate,
+                        value: Number(oSInp._lastValue)
+                    };
+                    var sumData = { sum: oFData.count + oSData.count }
+                    var oFModel = new JSONModel(oFData);
+                    var oSModel = new JSONModel(oSData);
+                    var sumModel = new JSONModel(sumData);
+                    fText.setModel(oFModel);
+                    sText.setModel(oSModel);
+                    sum.setModel(sumModel);
                 }.bind(this),
                 error: function(oError){
                     jQuery.sap.log.error(oError);

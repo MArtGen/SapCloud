@@ -2,26 +2,36 @@
   "welcomeFile": "/index.html",
   "authenticationMethod": "route",
   "routes": [
-    {
+   {
+      "source": "^/sapui5_resources/(.*)$",
+      "target": "$1",
+      "destination": "sapui5_provider"
+   },
+   {
+      "source": "/crs/(.*)",
+      "target": "/$1",
+      "destination": "crs"
+   },
+   {
       "source": "^(.*)$",
       "target": "$1",
       "service":"html5-apps-repo-rt",
-         "csrfProtection":true,
-         "authenticationType":"xsuaa",
-         "scope":{  
-            "GET":[  
-               "$XSAPPNAME.himta.view"
-            ],
-            "POST":[  
-               "$XSAPPNAME.himta.edit"
-            ],
-            "PUT":[  
-               "$XSAPPNAME.himta.edit"
-            ],
-            "DELETE":[  
-               "$XSAPPNAME.himta.edit"
-            ],
-            "default":"$XSAPPNAME.himta.view"
+      "csrfProtection":true,
+      "authenticationType":"xsuaa",
+      "scope":{  
+         "GET":[  
+            "$XSAPPNAME.himta.view"
+         ],
+         "POST":[  
+            "$XSAPPNAME.himta.edit"
+         ],
+         "PUT":[  
+            "$XSAPPNAME.himta.edit"
+         ],
+         "DELETE":[  
+            "$XSAPPNAME.himta.edit"
+         ],
+         "default":"$XSAPPNAME.himta.view"
          }
       }
    ]

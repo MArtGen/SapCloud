@@ -1,0 +1,11 @@
+applications:
+- name: himtamag-cf-java
+  host: himtamag-cf-java-host
+  memory: 1024M
+  instances: 1
+  path: target/himtamag-cf-0.0.1-SNAPSHOT.jar
+  buildpack: sap_java_buildpack
+  env:
+     SPRING_PROFILES_ACTIVE: cloud
+  services:
+    - lev_hdi

@@ -15,7 +15,7 @@ module.exports = () => {
         logger.info('Course get <select_all> request');
 
         try {
-            COMMON.checkAjaxAuth(req, "himta.view");
+            //COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Course GET Works. <select_all>", "DefaultUser");
 
             const db = new dbClass(req.db);
@@ -54,7 +54,7 @@ module.exports = () => {
         logger.info('Course get <select_by_maxid> request');
 
         try {
-            COMMON.checkAjaxAuth(req, "himta.view");
+            //COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Course GET Works. <select_by_maxid>", "DefaultUser");
 
             const db = new dbClass(req.db);

@@ -17,7 +17,7 @@ module.exports = () => {
         tracer.entering("/currency", req, res); */
 
         try {
-            COMMON.checkAjaxAuth(req, "himta.view");
+            //COMMON.checkAjaxAuth(req, "himta.view");
 /*             tracer.exiting("/currency", "Currency GET Works. <select_all>"); */
             helper.AddToLog("Currency GET Works. <select_all>", "DefaultUser");
 
@@ -57,7 +57,7 @@ module.exports = () => {
         logger.info('Currency post request');
 
         try {
-            COMMON.checkAjaxAuth(req, "himta.view");
+            //COMMON.checkAjaxAuth(req, "himta.view");
             helper.AddToLog("Currency POST Works.", "DefaultUser");
 
             const db = new dbClass(req.db);

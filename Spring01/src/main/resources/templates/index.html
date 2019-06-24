@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Spring Home</title>
+</head>
+<body>
+	<h2 th:text="'Hello, ' + ${appName} + '!'">Greetings</h2>
+	<h2>Person List:</h2>
+	<div th:each="person: ${list}">
+		<p>-------------------------------------------------</p>
+		<p th:text="'name: ' + ${person.name}">surname</p>
+		<p th:text="'surname: ' + ${person.surname}">surname</p>
+		<p th:text="'age: ' + ${person.age}">destination type:</p>
+		<p>-------------------------------------------------</p>
+	</div>
+</body>
+</html>
