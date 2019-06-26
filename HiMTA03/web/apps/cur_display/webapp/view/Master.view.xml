@@ -81,7 +81,10 @@
                 growing="true"
                 growingScrollToLoad="true"
                 noDataText="{i18n>tableNoDataText}"
-                items="{courseModel>/}"
+                items="{ path : 'courseModel>/',
+                         sorter: { path : 'courseModel>COID',
+	                        	   descending: true } 
+                        }"
                 width="auto">
                 <columns>
                     <Column>

@@ -8,15 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.leverx.cf.model.domain.Person;
-import com.leverx.cf.service.PersonService;
+import com.leverx.cf.model.domain.Currency;
+import com.leverx.cf.service.CurrencyService;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
 	
 	@Autowired
-	PersonService personService;
+	CurrencyService currencyService;
 	
 	@GetMapping
 	public String getHome(Model model) {
@@ -24,8 +24,8 @@ public class HomeController {
 		String appName = "DemoApp";
 		model.addAttribute("appName", appName);
 		
-		List<Person> personList = personService.getAll();
-		model.addAttribute("list", personList);
+		List<Currency> currencyList = currencyService.getAll();
+		model.addAttribute("list", currencyList);
 		
 		return "index";
 	}

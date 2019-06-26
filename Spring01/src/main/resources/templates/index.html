@@ -6,12 +6,12 @@
 </head>
 <body>
 	<h2 th:text="'Hello, ' + ${appName} + '!'">Greetings</h2>
-	<h2>Person List:</h2>
-	<div th:each="person: ${list}">
+	<h2>Currency List:</h2>
+	<div th:each="currency: ${list}">
 		<p>-------------------------------------------------</p>
-		<p th:text="'name: ' + ${person.name}">surname</p>
-		<p th:text="'surname: ' + ${person.surname}">surname</p>
-		<p th:text="'age: ' + ${person.age}">destination type:</p>
+		<p th:text="'name: ' + ${currency.name}">name</p>
+		<p th:text="'created by: ' + ${currency.createdby}">created by</p>
+		<p th:text="'created on: ' + ${currency.createdon}">created on</p>
 		<p>-------------------------------------------------</p>
 	</div>
 </body>

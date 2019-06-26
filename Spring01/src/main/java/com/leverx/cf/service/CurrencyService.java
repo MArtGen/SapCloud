@@ -15,39 +15,39 @@ import com.leverx.cf.util.Pair;
 public class CurrencyService {
 	
 	@Autowired
-	private CurrencyDao personDao;
+	private CurrencyDao currencyDao;
 	
-	public Pair<Currency, List<Course>> getBookList(Long id) {
-		return currencyDao.getBookList(id);
+	public Pair<Currency, List<Course>> getCurrencyList(Long id) {
+		return currencyDao.getCurrencyList(id);
 	}
 	
 	public List<Currency> getByName(String name) {
 		return currencyDao.getByName(name);
 	}
 	
-	public void update(Person entity) {
-		personDao.update(entity);
+	public void update(Currency entity) {
+		currencyDao.update(entity);
 	}
 	
 	public void delete(Long id) {
-		personDao.delete(id);
+		currencyDao.delete(id);
 	}
 	
-	public void save(Person entity) {
-		personDao.save(entity);
+	public void save(Currency entity) {
+		currencyDao.save(entity);
 	}
 	
-	public List<Person> getAll() {
-		return personDao.getAll();
+	public List<Currency> getAll() {
+		return currencyDao.getAll();
 	}
 	
-	public Person getById(Long id) {
-		Optional<Person> personOptional = personDao.getById(id);
-		Person person = null;
-		if (personOptional.isPresent()) {
-			person = personOptional.get();
+	public Currency getById(Long id) {
+		Optional<Currency> currencyOptional = currencyDao.getById(id);
+		Currency currency = null;
+		if (currencyOptional.isPresent()) {
+			currency = currencyOptional.get();
 		}
-		return person;
+		return currency;
 	}
 	
 }

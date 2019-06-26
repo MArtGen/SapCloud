@@ -17,29 +17,29 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leverx.cf.model.dao.CourseDao;
-import com.leverx.cf.model.domain.Book;
+import com.leverx.cf.model.domain.Course;
 
 @RestController
-@RequestMapping("/bookApi")
-public class BookController {
+@RequestMapping("/courseApi")
+public class CourseController {
 	
 	@Autowired
 	private CourseDao courseDao;
 	
 	@GetMapping("/{id}")
-	public Book getBookById(@PathVariable Long id) {
-		Optional<Book> bookOptional = courseDao.getById(id);
-		Book book = null;
-		if (bookOptional.isPresent()) {
-			book = bookOptional.get();
+	public Course getCourseById(@PathVariable Long id) {
+		Optional<Course> courseOptional = courseDao.getById(id);
+		Course course = null;
+		if (courseOptional.isPresent()) {
+			course = courseOptional.get();
 		}
-		return book;
+		return course;
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createBook(@RequestBody Book book) throws SQLException {
-		courseDao.save(book);
+	public void createBook(@RequestBody Course course) throws SQLException {
+		courseDao.save(course);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -50,12 +50,12 @@ public class BookController {
 	
 	@PutMapping
 	@ResponseStatus(HttpStatus.OK)
-	public void changeBook(@RequestBody Book book) {
-		courseDao.update(book);
+	public void changeBook(@RequestBody Course course) {
+		courseDao.update(course);
 	}
 	
 	@GetMapping("/all")
-	public List<Book> getAllBooks() {
+	public List<Course> getAllBooks() {
 		return courseDao.getAll();
 	}
 
