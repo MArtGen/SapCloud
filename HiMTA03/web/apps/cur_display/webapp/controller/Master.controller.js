@@ -21,7 +21,7 @@ sap.ui.define([
                 contentType: "application/json",
                 success: function(data){
                     var oModel = new JSONModel(data);
-                    var oTable = this.byId("CurrencyTable");
+                    var oTable = this.byId("currencyTable");
                     oTable.setModel(oModel, "oData");
                 }.bind(this),
                 error: function(oError){
@@ -29,6 +29,35 @@ sap.ui.define([
                     sap.m.MessageBox.error("Error of reading CURRENCY");
                 }.bind(this)
             });
+
+            jQuery.ajax({
+                type: "GET",
+                url: "/crs/EUR?ParamMode=2",
+                dataType: "json",
+                contentType: "application/json",
+                success: function(data){
+                    var oFInp = this.byId("inputFirstCourse");
+                    var oSInp = this.byId("inputSecCourse");
+                    var oData = {
+                        recipient: {
+                            fcount: Math.round(Number(oFInp._lastValue) * data.Cur_OfficialRate * 100) / 100,
+                            course: Number(data.Cur_OfficialRate),
+                            fvalue: Number(oFInp._lastValue),
+                            scount: Math.round(Number(oSInp._lastValue) * data.Cur_OfficialRate * 100) / 100,
+                            svalue: Number(oSInp._lastValue),
+                            sum: Math.round(((Number(oFInp._lastValue) * data.Cur_OfficialRate) +
+                                 (Number(oSInp._lastValue) * data.Cur_OfficialRate)) * 100) / 100
+                        }
+                    };
+                    var oModel = new JSONModel(oData);
+                    this.byId("countPanel").setModel(oModel, "countData");
+                    this.byId("countPanel").bindElement("countData>");
+                }.bind(this),
+                error: function(oError){
+                    jQuery.sap.log.error(oError);
+                    sap.m.MessageBox.error("Error of reading COURSE EUR");
+                }.bind(this)
+            })
         },
 
         onChange: function(oEvent) {
@@ -36,13 +65,13 @@ sap.ui.define([
             if(sExpend === true) {
                 jQuery.ajax({
                     type: "GET",
-                    url: this.host + "/course",
+                    url: this.host + "/course/tablecourse",
                     dataType: "json",
                     contentType: "application/json",
                     success: function(data){
                         var oModel = new JSONModel(data);
-                        var oTable = this.byId("CourseTable");
-                        oTable.setModel(oModel, "oData");
+                        var oTable = this.byId("courseTable");
+                        oTable.setModel(oModel, "courseModel");
                     }.bind(this),
                     error: function(oError){
                         jQuery.sap.log.error(oError);
@@ -61,26 +90,20 @@ sap.ui.define([
                 success: function(data){
                     var oFInp = this.byId("inputFirstCourse");
                     var oSInp = this.byId("inputSecCourse");
-                    var fText = this.byId("firstCourse");
-                    var sText = this.byId("secondCourse");
-                    var sum = this.byId("sum");
-                    var oFData = {
-                        count: Number(oFInp._lastValue) * data.Cur_OfficialRate,
-                        course: data.Cur_OfficialRate,
-                        value: Number(oFInp._lastValue)
+                    var oData = {
+                        recipient: {
+                            fcount: Math.round(Number(oFInp._lastValue) * data.Cur_OfficialRate * 100) / 100,
+                            course: Number(data.Cur_OfficialRate),
+                            fvalue: Number(oFInp._lastValue),
+                            scount: Math.round(Number(oSInp._lastValue) * data.Cur_OfficialRate * 100) / 100,
+                            svalue: Number(oSInp._lastValue),
+                            sum: Math.round(((Number(oFInp._lastValue) * data.Cur_OfficialRate) +
+                                 (Number(oSInp._lastValue) * data.Cur_OfficialRate)) * 100) / 100
+                        }
                     };
-                    var oSData = {
-                        count: Number(oSInp._lastValue) * data.Cur_OfficialRate,
-                        course: data.Cur_OfficialRate,
-                        value: Number(oSInp._lastValue)
-                    };
-                    var sumData = { sum: oFData.count + oSData.count }
-                    var oFModel = new JSONModel(oFData);
-                    var oSModel = new JSONModel(oSData);
-                    var sumModel = new JSONModel(sumData);
-                    fText.setModel(oFModel);
-                    sText.setModel(oSModel);
-                    sum.setModel(sumModel);
+                    var oModel = new JSONModel(oData);
+                    this.byId("countPanel").setModel(oModel, "countData");
+                    this.byId("countPanel").bindElement("countData>");
                 }.bind(this),
                 error: function(oError){
                     jQuery.sap.log.error(oError);

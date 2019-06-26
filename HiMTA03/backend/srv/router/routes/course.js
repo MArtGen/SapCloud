@@ -70,5 +70,25 @@ module.exports = () => {
         }
     });
 
+    app.get("/tablecourse", async (req, res, next) => {
+        const logger = req.loggingContext.getLogger("/Application");
+        logger.info('Course get <select_by_maxid> request');
+
+        try {
+            //COMMON.checkAjaxAuth(req, "himta.view");
+            helper.AddToLog("Course GET Works. Courses for table view", "Cur_display View");
+
+            const db = new dbClass(req.db);
+
+            const sSql = 'SELECT \"COID\", \"NAME\", \"DATE\", \"VALUE\", \"COURSE\".\"CREATEDBY\", \"COURSE\".\"CREATEDON\" FROM \"COURSE\" INNER JOIN \"CURRENCY\" ON \"COURSE\".\"CUID\" = \"CURRENCY\".\"CUID\";';
+            var result = await db.getVal(sSql);
+
+            res.type("application/json").status(201).send(JSON.stringify(result));
+        } catch (e) {
+            helper.AddToLog(e.message, "Cur_display View");
+            next(e);
+        }
+    });
+
     return app;
 };

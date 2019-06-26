@@ -2,36 +2,42 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
     xmlns:core="sap.ui.core"
     controllerName="cur_display.controller.Master">
     <Shell>
     <Page title="{i18n>appName}">
-        <Panel headerText="{i18n>currentcourse}">
+        <Panel id="countPanel" headerText="{i18n>currentcourse}">
             <content> 
                 <Label text="{i18n>firstPayment}" class="sapUiSmallMargin"/>
                 <Input
                     id="inputFirstCourse"
+                    type="Number"
                     value="193.87"
-                    description="The Result (EUR to BEL): {/course} * {/value} = {/count}"
+                    description="{i18n>euro}"
                     valueLiveUpdate="true"
-                    width="50%"/>
-                <Text id="firstCourse" text="The Result (EUR to BEL): {/course} * {/value} = {/count}"/>
+                    width="20%"/>
                 <Label text="{i18n>secondPayment}" class="sapUiSmallMargin"/>
                 <Input
                     id="inputSecCourse"
+                    type="Number"
                     value="351.55"
-                    description="The Result (EUR to BEL):{/course} * {/value} = {/count}"
+                    description="{i18n>euro}"
                     valueLiveUpdate="true"
-                    width="50%"/>
-                <Text id="secondCourse" text="The Result (EUR to BEL): {/course} * {/value} = {/count}"/>
-                <Button
-                    text="{i18n>count}"
-                    press=".onCount"/>
-                <Text id="sum" text="The Sum: {/sum}"/>
+                    width="20%"/>
+                <l:VerticalLayout class="sapUiContentPadding" width="100%">
+                    <Button
+                        text="{i18n>count}"
+                        press=".onCount"
+                        width="20%"/>
+                    <Text text="First Payment (EUR to BEL): {countData>/recipient/course} * {countData>/recipient/fvalue} = {countData>/recipient/fcount}"/>
+                    <Text text="Second Payment (EUR to BEL): {countData>/recipient/course} * {countData>/recipient/svalue} = {countData>/recipient/scount}"/>
+                    <Text text="The Sum: {countData>/recipient/sum}"/>
+                </l:VerticalLayout>
             </content>
         </Panel>
         <Table
-            id="CurrencyTable"
+            id="currencyTable"
             busyIndicatorDelay="0"
             growing="true"
             growingScrollToLoad="true"
@@ -70,19 +76,19 @@
         </Table>
         <Panel headerText="{i18n>courses}" expandable="true" expand=".onChange">
             <Table
-                id="CourseTable"
+                id="courseTable"
                 busyIndicatorDelay="0"
                 growing="true"
                 growingScrollToLoad="true"
                 noDataText="{i18n>tableNoDataText}"
-                items="{/course}"
+                items="{courseModel>/}"
                 width="auto">
                 <columns>
-                    <Column width="20%">
-                        <Label text="{i18n>cuid}" design="Bold"/>
-                    </Column>
                     <Column>
                         <Label text="{i18n>coid}" design="Bold"/>
+                    </Column>
+                    <Column width="20%">
+                        <Label text="{i18n>name}" design="Bold"/>
                     </Column>
                     <Column>
                         <Label text="{i18n>date}" design="Bold"/>
@@ -98,14 +104,14 @@
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem type="Navigation" press="onGoToDetail">
+                    <ColumnListItem type="Navigation">
                         <cells>
-                            <Text text="{cuid}"/>
-                            <Text text="{coid}"/>
-                            <Text text="{date}"/>
-                            <Text text="{value}"/>
-                            <Text text="{createdby}"/>
-                            <Text text="{createdon}"/>
+                            <Text text="{courseModel>COID}"/>
+                            <Text text="{courseModel>NAME}"/>
+                            <Text text="{courseModel>DATE}"/>
+                            <Text text="{courseModel>VALUE}"/>
+                            <Text text="{courseModel>CREATEDBY}"/>
+                            <Text text="{courseModel>CREATEDON}"/>
                         </cells>
                     </ColumnListItem>
                 </items>
