@@ -34,7 +34,7 @@ public class CourseDao implements ICourseDao {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn
 						.prepareStatement(
-								"SELECT TOP 1 \"coid\", \"date\", \"value\", \"createdby\", \"createdby\", \"cuid\" FROM " + COURSE_TABLE + " WHERE \"id\" = ?")) {
+								"SELECT TOP 1 \"COID\", \"DATE\", \"VALUE\", \"CREATEDBY\", \"CREATEDON\", \"CUID\" FROM " + COURSE_TABLE + " WHERE \"COID\" = ?")) {
 			stmnt.setLong(1, id);
 			ResultSet result = stmnt.executeQuery();
 			if (result.next()) {
@@ -60,7 +60,7 @@ public class CourseDao implements ICourseDao {
 		List<Course> courseList = new ArrayList<Course>();
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn
-						.prepareStatement("SELECT \"coid\", \"date\", \"value\", \"createdby\", \"createdon\", \"cuid\" FROM " + COURSE_TABLE)) {
+						.prepareStatement("SELECT \"COID\", \"DATE\", \"VALUE\", \"CREATEDBY\", \"CREATEDON\", \"CUID\" FROM " + COURSE_TABLE)) {
 			ResultSet result = stmnt.executeQuery();
 			while (result.next()) {
 				Course course = new Course();
@@ -82,12 +82,13 @@ public class CourseDao implements ICourseDao {
 	public void save(Course entity) throws SQLException {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"INSERT INTO " + COURSE_TABLE + "(\"date\", \"value\", \"createdby\", \"createdon\", \"cuid\") VALUES (?, ?, ?, ?, ?)")) {
-			stmnt.setString(1, entity.getDate());
-			stmnt.setString(2, entity.getValue());
-			stmnt.setString(3, entity.getCreatedby());
-			stmnt.setString(4, entity.getCreatedon());
-			stmnt.setLong(5, entity.getCuid());
+						"INSERT INTO " + COURSE_TABLE + "(\"COID\", \"DATE\", \"VALUE\", \"CREATEDBY\", \"CREATEDON\", \"CUID\") VALUES (?, ?, ?, ?, ?, ?)")) {
+			stmnt.setLong(1, entity.getCoid());
+			stmnt.setString(2, entity.getDate());
+			stmnt.setString(3, entity.getValue());
+			stmnt.setString(4, entity.getCreatedby());
+			stmnt.setString(5, entity.getCreatedon());
+			stmnt.setLong(6, entity.getCuid());
 			stmnt.execute();
 			logger.debug(stmnt.toString());
 			logger.debug(entity.toString());
@@ -99,7 +100,7 @@ public class CourseDao implements ICourseDao {
 	@Override
 	public void delete(Long id) {
 		try (Connection conn = dataSource.getConnection();
-				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM " + COURSE_TABLE + " WHERE \"cuid\" = ?")) {
+				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM " + COURSE_TABLE + " WHERE \"COID\" = ?")) {
 			stmnt.setLong(1, id);
 			stmnt.execute();
 		} catch (SQLException e) {
@@ -111,7 +112,7 @@ public class CourseDao implements ICourseDao {
 	public void update(Course entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"UPDATE " + COURSE_TABLE + " SET \"date\" = ?, \"value\" = ?, \"createdby\" = ?, \"createdon\" = ?, \"cuid\" = ? WHERE \"coid\" = ?")) {
+						"UPDATE " + COURSE_TABLE + " SET \"DATE\" = ?, \"VALUE\" = ?, \"CREATEDBY\" = ?, \"CREATEDON\" = ?, \"CUID\" = ? WHERE \"COID\" = ?")) {
 			stmnt.setString(1, entity.getDate());
 			stmnt.setString(2, entity.getValue());
 			stmnt.setString(3, entity.getCreatedby());

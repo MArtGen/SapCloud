@@ -21,7 +21,7 @@ public class HomeController {
 	@GetMapping
 	public String getHome(Model model) {
 		
-		String appName = "DemoApp";
+		String appName = "Artsiom's DemoApp";
 		model.addAttribute("appName", appName);
 		
 		List<Currency> currencyList = currencyService.getAll();

@@ -25,7 +25,7 @@ public class CurrencyDao implements ICurrencyDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(CurrencyDao.class);
 
-	public static final String CURRENCY_TABLE = "CURRENSY";
+	public static final String CURRENCY_TABLE = "CURRENCY";
 
 	@Autowired
 	private DataSource dataSource;
@@ -36,7 +36,7 @@ public class CurrencyDao implements ICurrencyDao {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn
 						.prepareStatement(
-								"SELECT TOP 1 \"cuid\", \"name\", \"createdby\", \"createdon\" FROM " + CURRENCY_TABLE + " WHERE \"cuid\" = ?")) {
+								"SELECT TOP 1 \"CUID\", \"NAME\", \"CREATEDBY\", \"CREATEDON\" FROM " + CURRENCY_TABLE + " WHERE \"CUID\" = ?")) {
 			stmnt.setLong(1, id);
 			ResultSet result = stmnt.executeQuery();
 			if (result.next()) {
@@ -60,7 +60,7 @@ public class CurrencyDao implements ICurrencyDao {
 		List<Currency> currencyList = new ArrayList<Currency>();
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn
-						.prepareStatement("SELECT \"cuid\", \"name\", \"createdby\", \"createdon\" FROM " + CURRENCY_TABLE)) {
+						.prepareStatement("SELECT \"CUID\", \"NAME\", \"CREATEDBY\", \"CREATEDON\" FROM " + CURRENCY_TABLE)) {
 			ResultSet result = stmnt.executeQuery();
 			while (result.next()) {
 				Currency currency = new Currency();
@@ -80,10 +80,11 @@ public class CurrencyDao implements ICurrencyDao {
 	public void save(Currency entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"INSERT INTO " + CURRENCY_TABLE + "(\"name\", \"createdby\", \"createdon\") VALUES (?, ?, ?)")) {
-			stmnt.setString(1, entity.getName());
-			stmnt.setString(2, entity.getCreatedby());
-			stmnt.setString(3, entity.getCreatedon());
+						"INSERT INTO " + CURRENCY_TABLE + "(\"CUID\", \"NAME\", \"CREATEDBY\", \"CREATEDON\") VALUES (?, ?, ?, ?)")) {
+			stmnt.setLong(1, entity.getCuid());
+			stmnt.setString(2, entity.getName());
+			stmnt.setString(3, entity.getCreatedby());
+			stmnt.setString(4, entity.getCreatedon());
 			stmnt.execute();
 		} catch (SQLException e) {
 			logger.error("Error while trying to add entity: " + e.getMessage());
@@ -93,7 +94,7 @@ public class CurrencyDao implements ICurrencyDao {
 	@Override
 	public void delete(Long id) {
 		try (Connection conn = dataSource.getConnection();
-				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM " + CURRENCY_TABLE + " WHERE \"cuid\" = ?")) {
+				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM " + CURRENCY_TABLE + " WHERE \"CUID\" = ?")) {
 			stmnt.setLong(1, id);
 			stmnt.execute();
 		} catch (SQLException e) {
@@ -105,7 +106,7 @@ public class CurrencyDao implements ICurrencyDao {
 	public void update(Currency entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"UPDATE " + CURRENCY_TABLE + " SET \"name\" = ?, \"createdby\" = ?, \"createdon\" = ? WHERE \"cuid\" = ?")) {
+						"UPDATE " + CURRENCY_TABLE + " SET \"NAME\" = ?, \"CREATEDBY\" = ?, \"CREATEDON\" = ? WHERE \"CUID\" = ?")) {
 			stmnt.setString(1, entity.getName());
 			stmnt.setString(2, entity.getCreatedby());
 			stmnt.setString(3, entity.getCreatedon());
@@ -121,7 +122,7 @@ public class CurrencyDao implements ICurrencyDao {
 		List<Currency> currencyList = new ArrayList<Currency>();
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"SELECT \"cuid\", \"name\", \"createdby\", \"createdon\" FROM " + CURRENCY_TABLE + " WHERE \"name\" = ?")) {
+						"SELECT \"CUID\", \"NAME\", \"CREATEDBY\", \"CREATEDON\" FROM " + CURRENCY_TABLE + " WHERE \"NAME\" = ?")) {
 			stmnt.setString(1, name);
 			ResultSet result = stmnt.executeQuery();
 			while (result.next()) {
@@ -143,18 +144,16 @@ public class CurrencyDao implements ICurrencyDao {
 		Pair<Currency, List<Course>> currencyCourse = new Pair<Currency, List<Course>>();
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"SELECT \"P\".\"cuid\" AS \"currency_id\", "
-						+ "\"Cu\".\"name\" AS \"currency_name\", " 
-						+ "\"Cu\".\"createdby\" AS \"currency_createdby\", "
-						+ "\"Cu\".\"createdon\" AS \"currency_createdon\", " 
-						+ "\"Co\".\"coid\" AS \"course_id\", "
-						+ "\"Co\".\"date\" AS \"course_date\", "
-						+ "\"Co\".\"value\" AS \"course_value\", " 
-						+ "\"Co\".\"createdby\" AS \"course_createdby\", "
-						+ "\"Co\".\"createdon\" AS \"course_createdon\"" 
-						+ "FROM " + CURRENCY_TABLE + " AS \"Cu\" "
-						+ "INNER JOIN " + CourseDao.COURSE_TABLE + " AS \"Co\" " 
-						+ "ON \"Cu\".\"cuid\" = \"Co\".\"cuid\" WHERE \"Cu\".\"cuid\" = ?")) {
+						"SELECT \"CU\".\"CUID\" AS \"CURRENCY_ID\", "
+						+ "\"CU\".\"NAME\" AS \"CURRENCY_NAME\", " 
+						+ "\"CU\".\"CREATEDBY\" AS \"CURRENCY_CREATEDBY\", "
+						+ "\"CU\".\"CREATEDON\" AS \"CURRENCY_CREATEDON\", " 
+						+ "\"CO\".\"COID\" AS \"COURSE_ID\", "
+						+ "\"CO\".\"DATE\" AS \"COURSE_DATE\", "
+						+ "\"CO\".\"VALUE\" AS \"COURSE_VALUE\" " 
+						+ "FROM " + CURRENCY_TABLE + " AS \"CU\" "
+						+ "INNER JOIN " + CourseDao.COURSE_TABLE + " AS \"CO\" " 
+						+ "ON \"CU\".\"CUID\" = \"CO\".\"CUID\" WHERE \"CU\".\"CUID\" = ?")) {
 			stmnt.setLong(1, id);
 			ResultSet result = stmnt.executeQuery();
 			Currency currency = null;
@@ -171,8 +170,6 @@ public class CurrencyDao implements ICurrencyDao {
 				course.setCoid(result.getLong("course_id"));
 				course.setDate(result.getString("course_date"));
 				course.setValue(result.getString("course_value"));
-				course.setCreatedby(result.getString("course_createdby"));
-				course.setCreatedon(result.getString("course_createdon"));
 				courseList.add(course);
 			}
 			currencyCourse.setKey(currency);
