@@ -1,4 +1,6 @@
 {
+  "welcomeFile": "/route/",
+  "authenticationMethod": "none",
   "routes": [
     {
       "source": "/route/(.*)",

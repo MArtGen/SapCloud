@@ -25,7 +25,7 @@ public class CurrencyDao implements ICurrencyDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(CurrencyDao.class);
 
-	public static final String CURRENCY_TABLE = "CURRENCY";
+	public static final String CURRENCY_TABLE = "\"javaCFMTA::CURRENCY\"";
 
 	@Autowired
 	private DataSource dataSource;

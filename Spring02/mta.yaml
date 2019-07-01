@@ -3,15 +3,6 @@ _schema-version: "2.1"
 version: 0.0.3
 
 modules:
- - name: java-hdi
-   type: hdb
-   path: db
-   parameters:
-     memory: 256M
-     disk-quota: 256M
-   requires:
-     - name: lev_hdi
-
  - name: java-service
    type: java
    path: service/cf-demo-mag
@@ -33,9 +24,9 @@ modules:
      - name: lev_hdi
      - name: lev_dest
      - name: lev_conn
-     - name: xsuaa
+     - name: lev_uaa
 
- - name: router
+ - name: java-router
    type: nodejs
    path: router
    parameters:
@@ -44,7 +35,7 @@ modules:
    requires:
      - name: lev_router
      - name: lev_dest
-     - name: xsuaa
+     - name: lev_uaa
      - name: java-service
        group: destinations
        properties:
@@ -53,16 +44,8 @@ modules:
          forwardAuthToken: true
 
 resources:
- - name: lev_hdi
-   parameters:
-     service-plan: hdi-shared
-     service: hanatrial
-     config: {schema: JLXHDI}
-   properties:
-     hdi-container-name: ${service-name}
-   type: com.sap.xs.hdi-container
 
- - name: xsuaa
+ - name: lev_uaa
    type: org.cloudfoundry.managed-service
    parameters:
      service: xsuaa
@@ -86,3 +69,6 @@ resources:
    parameters:
      service: connectivity
      service-plan: lite
+    
+ - name: lev_hdi
+   type: org.cloudfoundry.existing-service

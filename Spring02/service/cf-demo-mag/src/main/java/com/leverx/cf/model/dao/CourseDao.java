@@ -23,7 +23,7 @@ public class CourseDao implements ICourseDao {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CourseDao.class);
 
-	public static final String COURSE_TABLE = "COURSE";
+	public static final String COURSE_TABLE = "\"javaCFMTA::COURSE\"";
 
 	@Autowired
 	private DataSource dataSource;
