@@ -9,19 +9,25 @@ const COMMON = require(global.__base + "utils/common");
 module.exports = () => {
     const app = express.Router();
 
-		//-----------------GET ALL DESTINATIONS---------------
+    //-----------------GET ALL DESTINATIONS---------------
     app.get("/", async (req, res, next) => {
         const logger = req.loggingContext.getLogger("/Application");
 
         try {
-            COMMON.checkAjaxAuth(req, "himta.view");
+            /*             COMMON.checkAjaxAuth(req, "himta.view"); */
             logger.info('Getting onPremise systems');
             let aOnPremiseSystems = await cloudServices.getOnPremiseSystems();
             logger.info('onPremise systems received');
 
             //data contains secure information. So we filter it
             aOnPremiseSystems = aOnPremiseSystems
-                .map(system => (({Name, Description}) => ({Name, Description}))(system));
+                .map(system => (({
+                    Name,
+                    Description
+                }) => ({
+                    Name,
+                    Description
+                }))(system));
 
             res.type("application/json").status(200).send(JSON.stringify(aOnPremiseSystems));
         } catch (e) {
@@ -30,7 +36,7 @@ module.exports = () => {
     });
 
 
-		//-----------------GET DESTINATION BY NAME---------------
+    //-----------------GET DESTINATION BY NAME---------------
     app.get("/:syid", async (req, res, next) => {
         const logger = req.loggingContext.getLogger("/Application");
 
@@ -42,12 +48,12 @@ module.exports = () => {
             let oOnPremiseSystem = await cloudServices.getOnPremiseSystemById(syid);
             logger.info('onPremise system received');
 
-/*          Filter by property 
-            if (!oOnPremiseSystem.destinationConfiguration.usage
-                || oOnPremiseSystem.destinationConfiguration.usage.indexOf("pt_system") === -1) {
-                    throw new PTError.API_SystemIsNotForPT([syid]);
-            }
-*/
+            /*          Filter by property 
+                        if (!oOnPremiseSystem.destinationConfiguration.usage
+                            || oOnPremiseSystem.destinationConfiguration.usage.indexOf("pt_system") === -1) {
+                                throw new PTError.API_SystemIsNotForPT([syid]);
+                        }
+            */
             oOnPremiseSystem = {
                 Name: oOnPremiseSystem.destinationConfiguration.Name,
                 Description: oOnPremiseSystem.destinationConfiguration.Description
@@ -59,22 +65,22 @@ module.exports = () => {
         }
     });
 
-		//-----------------GET DATA FROM On-Premise System---------------
+    //-----------------GET DATA FROM On-Premise System---------------
     app.get("/data/:syid", async (req, res, next) => {
         try {
             COMMON.checkAjaxAuth(req, "himta.view");
-	  			const logger = req.loggingContext.getLogger("/Application");
+            const logger = req.loggingContext.getLogger("/Application");
 
-    			logger.info('Getting onPremise system');
-    			const oOnPremiseSystem = await cloudServices.getOnPremiseSystemById(syid);
-    			logger.info('onPremise system received');
+            logger.info('Getting onPremise system');
+            const oOnPremiseSystem = await cloudServices.getOnPremiseSystemById(syid);
+            logger.info('onPremise system received');
 
-		    	const oData = await cloudServices.getOnPremiseSystemData(oOnPremiseSystem, "en");
-        	res.type("application/json").status(200).send(JSON.stringify(oData));
+            const oData = await cloudServices.getOnPremiseSystemData(oOnPremiseSystem, "en");
+            res.type("application/json").status(200).send(JSON.stringify(oData));
         } catch (e) {
             next(e);
         }
-		});
+    });
 
 
     return app;

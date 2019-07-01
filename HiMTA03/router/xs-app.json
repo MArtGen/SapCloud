@@ -19,6 +19,11 @@
       "destination": "crs"
     },
     {
+      "source": "^/s4c/(.*)",
+      "target": "/$1",
+      "destination": "S4C"
+    },
+    {
       "source": "^/(.*)$",
       "target": "$1",
       "service": "html5-apps-repo-rt",

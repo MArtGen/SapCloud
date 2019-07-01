@@ -40,6 +40,22 @@ app.use(compression({
     threshold: "1b"
 }));
 
+//Build a JWT Strategy from the bound UAA resource
+/* passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
+    uaa: {
+        tag: "xsuaa"
+    }
+}).uaa));
+app.use(passport.initialize());
+
+if (!global.DEBUG_MODE) {
+    app.use(
+        passport.authenticate("JWT", {
+            session: false
+        })
+    );
+}; */
+
 const hanaOptions = xsenv.getServices({
     hana: {
         plan: "hdi-shared"
@@ -62,23 +78,6 @@ const hanaOptions = xsenv.getServices({
     }
 }; */
 
-//Build a JWT Strategy from the bound UAA resource
-/* passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
-    uaa: {
-        tag: "xsuaa"
-    }
-}).uaa));
-
-app.use(passport.initialize());
-
-if (!global.DEBUG_MODE) {
-    app.use(
-        passport.authenticate("JWT", {
-            session: false
-        })
-    );
-} */
-
 hanaOptions.hana.pooling = true;
 app.use(
     xsHDBConn.middleware(hanaOptions.hana)
@@ -95,7 +94,7 @@ cds
         crashOnError: false
     })
     .at("/odata/")
-/*     .with(require("./router/odata.js")) */
+    /*     .with(require("./router/odata.js")) */
     .in(app)
     .catch(err => {
         // do not crash on error
@@ -110,11 +109,11 @@ setInterval(schedulerExecute, 24 * 60 * 60 * 1000);
 
 //Error handling
 app.use(function (err, req, res, next) {
-        res.status(500).send({
-            "msgId": "",
-            "type": "Error",
-            "msg": err.message
-        });
+    res.status(500).send({
+        "msgId": "",
+        "type": "Error",
+        "msg": err.message
+    });
 });
 
 //Start the Server

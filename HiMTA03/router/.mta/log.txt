@@ -10,19 +10,19 @@
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.proc.ModuleBuildDependency$$impl4 for bean interface com.sap.di.ext.mta.proc.ModuleBuildDependency
 [main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router
 [main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: created 6 verification tasks
-[pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol resource[lev_dest]
-[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol resource[lev_conn]
-[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol resource[lev_uaa]
 [pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol resource[lev_srv]
+[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol resource[lev_uaa]
+[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol resource[lev_conn]
+[pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol resource[lev_dest]
 [pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol resource[lev_router]
 [pool-1-thread-6] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: started symbol module[router]
-[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_srv]
-[pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_dest]
-[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_conn]
-[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_uaa]
 [pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_router]
+[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_conn]
+[pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_dest]
+[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_srv]
+[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol resource[lev_uaa]
 [pool-1-thread-6] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'router': command timeout is 300 seconds
-[pool-1-thread-6] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'router': command output file is D:\SapCloud\SapCloud\HiMTA03\router\.mta\modulebuild11268505820208538775.txt
+[pool-1-thread-6] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'router': command output file is D:\SapCloud\SapCloud\HiMTA03\router\.mta\modulebuild3046822283269316470.txt
 [pool-1-thread-6] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'router': invoking command [npm.cmd, install, --production]
 [pool-1-thread-6] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA lev_router: finished symbol module[router]
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.DeploymentDescriptor$$impl5 for bean interface com.sap.di.ext.mta.dto.DeploymentDescriptor

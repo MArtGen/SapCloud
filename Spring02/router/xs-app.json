@@ -1,0 +1,10 @@
+{
+  "routes": [
+    {
+      "source": "/route/(.*)",
+      "target": "$1",
+      "destination": "java-service",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

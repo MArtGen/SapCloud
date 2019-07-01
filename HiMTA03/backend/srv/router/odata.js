@@ -4,7 +4,6 @@
 
 const dbClass = require(global.__base + "utils/dbClass");
 const helper = require(global.__base + "utils/Helper");
-const hdbext = require("@sap/hdbext");
 const COMMON = require(global.__base + "utils/common");
 
 const addWhereClause = (req, aWhere) => {
@@ -12,7 +11,11 @@ const addWhereClause = (req, aWhere) => {
         req.query.SELECT.where.concat(["and"]).concat(aWhere) : aWhere;
 };
 
-const getCreatedByClause = sCreatedBy => [{ref: ["createdby"]}, "=", {val: sCreatedBy}];
+const getCreatedByClause = sCreatedBy => [{
+    ref: ["createdby"]
+}, "=", {
+    val: sCreatedBy
+}];
 
 module.exports = function () {
     this.before("READ", req => {
@@ -33,7 +36,7 @@ module.exports = function () {
         } = log;
         if (data.length < 1) {
             return null;
-        } 
+        }
 
         var client = await dbClass.createConnection();
         let db = new dbClass(client);
@@ -43,7 +46,7 @@ module.exports = function () {
         }
         data.text = "Newest courses were added";
         const oLog = helper._prepareObject(data, "AutoBot");
-              oLog.text = data.text;
+        oLog.text = data.text;
         const sSql = `INSERT INTO "LOG" VALUES(?,?,?,?)`
         const aValues = [data.loid, data.text, data.createdby, data.createdon];
 

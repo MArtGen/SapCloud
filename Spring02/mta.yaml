@@ -1,0 +1,88 @@
+ID: javaCFMTA
+_schema-version: "2.1"
+version: 0.0.3
+
+modules:
+ - name: java-hdi
+   type: hdb
+   path: db
+   parameters:
+     memory: 256M
+     disk-quota: 256M
+   requires:
+     - name: lev_hdi
+
+ - name: java-service
+   type: java
+   path: service/cf-demo-mag
+   build-parameters:
+     builder: maven
+     maven-opts:
+       command: [ clean, install ]
+       defines:
+         skipTests: true
+     build-result: target/cf-demo-mag-0.0.1-SNAPSHOT.jar
+   parameters:
+     memory: 1024M
+     disk-quota: 512M
+   provides:
+     - name: java-service
+       properties:
+         url: "${default-url}"
+   requires:
+     - name: lev_hdi
+     - name: lev_dest
+     - name: lev_conn
+     - name: xsuaa
+
+ - name: router
+   type: nodejs
+   path: router
+   parameters:
+     disk-quota: 256M
+     memory: 128M
+   requires:
+     - name: lev_router
+     - name: lev_dest
+     - name: xsuaa
+     - name: java-service
+       group: destinations
+       properties:
+         name: java-service
+         url: '~{url}'
+         forwardAuthToken: true
+
+resources:
+ - name: lev_hdi
+   parameters:
+     service-plan: hdi-shared
+     service: hanatrial
+     config: {schema: JLXHDI}
+   properties:
+     hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
+
+ - name: xsuaa
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service: xsuaa
+     service-plan: application
+     path: ./xs-security.json
+
+ - name: lev_dest
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service: destination
+     service-plan: lite
+
+ - name: lev_router
+   parameters:
+     service-plan: app-runtime
+     service: html5-apps-repo
+   type: org.cloudfoundry.managed-service
+
+ - name: lev_conn
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service: connectivity
+     service-plan: lite
