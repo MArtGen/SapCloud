@@ -31,7 +31,13 @@ public class HomeController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String getHome(Model model) {
 		String appName = platform.getApplicationName();
+		String appSchema = platform.getVcapServices().get("hanatrial").get(0).getAsJsonObject().get("credentials").getAsJsonObject().get("schema").toString();
+		String appSpace = platform.getVcapApplication().get("space_name").toString();
+		String appUser = cloudService.getUserInfo();
 		model.addAttribute("appName", appName);
+		model.addAttribute("appSchema", appSchema);
+		model.addAttribute("appSpace", appSpace);
+		model.addAttribute("appUser", appUser);
 		List<Destination> destinations = cloudService.getDestinations();
 		model.addAttribute("destinations", destinations);
 		return "index";
