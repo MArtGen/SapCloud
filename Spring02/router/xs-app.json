@@ -1,12 +1,16 @@
-{
+{  
   "welcomeFile": "/route/",
-  "authenticationMethod": "none",
   "routes": [
     {
       "source": "/route/(.*)",
       "target": "$1",
       "destination": "java-service",
       "authenticationType": "xsuaa"
+    },
+    {
+      "source": "/data/(.*)",
+      "target": "/$1",
+      "destination": "data"
     }
   ]
 }

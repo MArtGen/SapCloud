@@ -26,7 +26,7 @@ public class ODataController {
 	
 	@GetMapping("/product")
 	public List<Product> getAllProduct() {
-		return odataService.getProductOData("odata_free");
+		return odataService.getProductOData("data");
 	}
 	
 	@GetMapping("/country")

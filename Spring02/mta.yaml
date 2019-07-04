@@ -24,7 +24,7 @@ modules:
      - name: lev_hdi
      - name: lev_dest
      - name: lev_conn
-     - name: lev_uaa
+     - name: xsuaa
 
  - name: java-router
    type: nodejs
@@ -35,7 +35,7 @@ modules:
    requires:
      - name: lev_router
      - name: lev_dest
-     - name: lev_uaa
+     - name: xsuaa
      - name: java-service
        group: destinations
        properties:
@@ -44,8 +44,16 @@ modules:
          forwardAuthToken: true
 
 resources:
+ - name: lev_hdi
+   parameters:
+     service-plan: hdi-shared
+     service: hanatrial
+     config: {schema: hanadbmag}
+   properties:
+     hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
 
- - name: lev_uaa
+ - name: xsuaa
    type: org.cloudfoundry.managed-service
    parameters:
      service: xsuaa
@@ -69,6 +77,3 @@ resources:
    parameters:
      service: connectivity
      service-plan: lite
-    
- - name: lev_hdi
-   type: org.cloudfoundry.existing-service

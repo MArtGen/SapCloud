@@ -1,6 +1,6 @@
 npm WARN html5-apps-approuter@ No repository field.
 npm WARN html5-apps-approuter@ No license field.
 
-audited 473 packages in 1.47s
+audited 473 packages in 1.99s
 found 5 high severity vulnerabilities
   run `npm audit fix` to fix them, or `npm audit` for details

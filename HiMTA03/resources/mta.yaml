@@ -50,9 +50,3 @@ resources:
             service: xsuaa
             shared: true
         type: org.cloudfoundry.managed-service
-    -   
-        name: lev_portal
-        parameters:
-           service-plan: standard
-           service: portal
-        type: org.cloudfoundry.managed-service
