@@ -1,6 +1,6 @@
 applications:
-- name: himtamag-c5277740
-  host: himtamag-c5277740-host
+- name: himtamag
+  host: himtamag-host
   memory: 1024M
   instances: 1
   path: target/cf-demo-mag-0.0.1-SNAPSHOT.jar

@@ -8,6 +8,12 @@
       "destination": "sapui5_provider"
     },
     {
+      "source": "/route/(.*)",
+      "target": "$1",
+      "destination": "java-service",
+      "authenticationType": "xsuaa"
+    },
+    {
       "source": "/api/(.*)",
       "target": "$1",
       "destination": "lev_srv",

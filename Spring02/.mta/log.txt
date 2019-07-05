@@ -7,29 +7,22 @@
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.ProvidedSymbol$$impl2 for bean interface com.sap.di.ext.mta.dto.ProvidedSymbol
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.RequiredSymbol$$impl3 for bean interface com.sap.di.ext.mta.dto.RequiredSymbol
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.Resource$$impl4 for bean interface com.sap.di.ext.mta.dto.Resource
-[main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Processing MTA javaCFMTA
+[main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Processing MTA java-service
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.proc.ModuleBuildDependency$$impl5 for bean interface com.sap.di.ext.mta.proc.ModuleBuildDependency
-[main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA
-[main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: created 7 verification tasks
-[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: started symbol resource[lev_hdi]
-[pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: started symbol resource[xsuaa]
-[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: started symbol resource[lev_dest]
-[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: started symbol resource[lev_router]
-[pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: started symbol resource[lev_conn]
-[pool-1-thread-6] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: started symbol module[java-service]
-[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: finished symbol resource[lev_router]
-[pool-1-thread-7] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: started symbol module[java-router]
-[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: finished symbol resource[lev_hdi]
-[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: finished symbol resource[lev_dest]
-[pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: finished symbol resource[lev_conn]
-[pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: finished symbol resource[xsuaa]
-[pool-1-thread-7] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-router': command timeout is 300 seconds
-[pool-1-thread-6] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-service': command timeout is 300 seconds
-[pool-1-thread-7] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-router': command output file is D:\SapCloud\SapCloud\spring02\.mta\modulebuild2310119986982059660.txt
-[pool-1-thread-7] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-router': invoking command [npm.cmd, install, --production]
-[pool-1-thread-6] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-service': command output file is D:\SapCloud\SapCloud\spring02\.mta\modulebuild6228261729058134716.txt
-[pool-1-thread-6] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-service': invoking command [mvn.cmd, -B, clean, install, -DskipTests="true"]
-[pool-1-thread-7] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: finished symbol module[java-router]
-[pool-1-thread-6] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA javaCFMTA: finished symbol module[java-service]
+[main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service
+[main] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: created 5 verification tasks
+[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: started symbol resource[lev_dest]
+[pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: started symbol module[java-service]
+[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: started symbol resource[lev_conn]
+[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: started symbol resource[lev_hdi]
+[pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: started symbol resource[lev_uaa]
+[pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: finished symbol resource[lev_uaa]
+[pool-1-thread-4] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: finished symbol resource[lev_conn]
+[pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: finished symbol resource[lev_hdi]
+[pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: finished symbol resource[lev_dest]
+[pool-1-thread-5] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-service': command timeout is 300 seconds
+[pool-1-thread-5] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-service': command output file is D:\SapCloud\SapCloud\spring02\.mta\modulebuild5577181851809120030.txt
+[pool-1-thread-5] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'java-service': invoking command [mvn.cmd, -B, clean, install, -DskipTests="true"]
+[pool-1-thread-5] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA java-service: finished symbol module[java-service]
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.DeploymentDescriptor$$impl6 for bean interface com.sap.di.ext.mta.dto.DeploymentDescriptor
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.DeploymentModule$$impl7 for bean interface com.sap.di.ext.mta.dto.DeploymentModule

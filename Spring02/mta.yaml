@@ -1,4 +1,4 @@
-ID: javaCFMTA
+ID: java-service
 _schema-version: "2.1"
 version: 0.0.3
 
@@ -18,30 +18,14 @@ modules:
      disk-quota: 512M
    provides:
      - name: java-service
+       public: true
        properties:
          url: "${default-url}"
    requires:
      - name: lev_hdi
      - name: lev_dest
      - name: lev_conn
-     - name: xsuaa
-
- - name: java-router
-   type: nodejs
-   path: router
-   parameters:
-     disk-quota: 256M
-     memory: 128M
-   requires:
-     - name: lev_router
-     - name: lev_dest
-     - name: xsuaa
-     - name: java-service
-       group: destinations
-       properties:
-         name: java-service
-         url: '~{url}'
-         forwardAuthToken: true
+     - name: lev_uaa
 
 resources:
  - name: lev_hdi
@@ -53,24 +37,17 @@ resources:
      hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container
 
- - name: xsuaa
+ - name: lev_uaa
    type: org.cloudfoundry.managed-service
    parameters:
      service: xsuaa
      service-plan: application
-     path: ./xs-security.json
 
  - name: lev_dest
    type: org.cloudfoundry.managed-service
    parameters:
      service: destination
      service-plan: lite
-
- - name: lev_router
-   parameters:
-     service-plan: app-runtime
-     service: html5-apps-repo
-   type: org.cloudfoundry.managed-service
 
  - name: lev_conn
    type: org.cloudfoundry.managed-service

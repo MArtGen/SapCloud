@@ -20,6 +20,7 @@ modules:
             - {name: lev_dest}
             - {name: lev_uaa}
             - {name: lev_srv, group: destinations, properties: {name: lev_srv, url: '~{url}', forwardAuthToken: true}}
+            - {name: java-service, group: destinations, properties: {name: java-service, url: '~{url}', forwardAuthToken: true}}
 resources:
     -
         name: lev_srv
@@ -27,6 +28,13 @@ resources:
         parameters:
             provider-nid: mta
             provider-id: 'lev_backend:lev_srv'
+            version: '>=0.0.1'
+    -
+        name: java-service
+        type: configuration
+        parameters:
+            provider-nid: mta
+            provider-id: 'java-service:java-service'
             version: '>=0.0.1'
     -
         name: lev_dest
