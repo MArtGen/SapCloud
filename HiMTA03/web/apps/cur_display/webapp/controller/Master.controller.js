@@ -58,6 +58,11 @@ sap.ui.define([
                     sap.m.MessageBox.error("Error of reading COURSE EUR");
                 }.bind(this)
             })
+
+            var toolPage = this.byId("toolPage");
+            var sideExpanded = toolPage.getSideExpanded();
+            this._setToggleButtonTooltip(sideExpanded);
+			toolPage.setSideExpanded(!toolPage.getSideExpanded());
         },
 
         onChange: function(oEvent) {
@@ -110,6 +115,44 @@ sap.ui.define([
                     sap.m.MessageBox.error("Error of reading COURSE EUR");
                 }.bind(this)
             })
+        },
+
+        onCollapseExpandPress: function () {
+			var toolPage = this.byId("toolPage");
+			var sideExpanded = toolPage.getSideExpanded();
+
+			this._setToggleButtonTooltip(sideExpanded);
+
+			toolPage.setSideExpanded(!toolPage.getSideExpanded());
+        },
+        
+        _setToggleButtonTooltip : function(bLarge) {
+			var toggleButton = this.byId('sideNavigationToggleButton');
+			if (bLarge) {
+				toggleButton.setTooltip('Large Size Navigation');
+			} else {
+				toggleButton.setTooltip('Small Size Navigation');
+			}
+        },
+        
+        onCreateCur: function () {
+            sap.m.URLHelper.redirect("/cur_create/index.html");
+        },
+
+        onCurList: function () {
+            sap.m.URLHelper.redirect("https://himtamag-cf-java-host.cfapps.eu10.hana.ondemand.com/");
+        },
+
+        onAuth: function () {
+            sap.m.URLHelper.redirect("/route/auth");
+        },
+
+        onScope: function () {
+            sap.m.URLHelper.redirect("/route/scope");
+        },
+
+        onRoutes: function () {
+            sap.m.URLHelper.redirect("/route/");
         }
     });
 });
