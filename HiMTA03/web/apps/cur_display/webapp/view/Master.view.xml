@@ -1,90 +1,130 @@
-<View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" controllerName="cur_display.controller.Master">
+<View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:t="sap.tnt" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" controllerName="cur_display.controller.Master">
 	<Shell>
-		<Page title="{i18n>appName}">
-			<Panel id="countPanel" headerText="{i18n>currentcourse}">
-				<content>
-					<Label text="{i18n>firstPayment}" class="sapUiSmallMargin" />
-					<Input id="inputFirstCourse" type="Number" value="193.87" description="{i18n>euro}" valueLiveUpdate="true" width="20%" />
-					<Label text="{i18n>secondPayment}" class="sapUiSmallMargin" />
-					<Input id="inputSecCourse" type="Number" value="351.55" description="{i18n>euro}" valueLiveUpdate="true" width="20%" />
-					<VerticalLayout class="sapUiContentPadding" width="100%">
-						<Button text="{i18n>count}" press=".onCount" width="20%" />
-						<Text text="First Payment (EUR to BEL): {countData>/recipient/course} * {countData>/recipient/fvalue} = {countData>/recipient/fcount}" />
-						<Text text="Second Payment (EUR to BEL): {countData>/recipient/course} * {countData>/recipient/svalue} = {countData>/recipient/scount}" />
-						<Text text="The Sum: {countData>/recipient/sum}" />
-					</VerticalLayout>
-				</content>
-			</Panel>
-			<Table id="currencyTable" busyIndicatorDelay="0" growing="true" growingScrollToLoad="true" noDataText="{i18n>tableNoDataText}" items="{/currency}" width="auto">
-				<headerToolbar>
-					<Toolbar>
-						<Title id="idCountTitle1" text="{i18n>currency}" />
-					</Toolbar>
-				</headerToolbar>
-				<columns>
-					<Column width="20%">
-						<Label text="{i18n>cuid}" design="Bold" />
-					</Column>
-					<Column>
-						<Label text="{i18n>name}" design="Bold" />
-					</Column>
-					<Column>
-						<Label text="{i18n>createdby}" design="Bold" />
-					</Column>
-					<Column>
-						<Label text="{i18n>createdon}" design="Bold" />
-					</Column>
-				</columns>
-				<items>
-					<ColumnListItem type="Navigation" press="onGoToDetail">
-						<cells>
-							<Text text="{cuid}" />
-							<Text text="{name}" />
-							<Text text="{createdby}" />
-							<Text text="{createdon}" />
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-			<Panel headerText="{i18n>courses}" expandable="true" expand=".onChange">
-				<Table id="courseTable" busyIndicatorDelay="0" growing="true" growingScrollToLoad="true" noDataText="{i18n>tableNoDataText}" items="{ path : 'courseModel>/',
-                         sorter: { path : 'courseModel>COID',
-	                        	   descending: true } 
-                        }" width="auto">
-					<columns>
-						<Column>
-							<Label text="{i18n>coid}" design="Bold" />
-						</Column>
-						<Column width="20%">
-							<Label text="{i18n>name}" design="Bold" />
-						</Column>
-						<Column>
-							<Label text="{i18n>date}" design="Bold" />
-						</Column>
-						<Column>
-							<Label text="{i18n>value}" design="Bold" />
-						</Column>
-						<Column>
-							<Label text="{i18n>createdby}" design="Bold" />
-						</Column>
-						<Column>
-							<Label text="{i18n>createdon}" design="Bold" />
-						</Column>
-					</columns>
-					<items>
-						<ColumnListItem type="Navigation">
-							<cells>
-								<Text text="{courseModel>COID}" />
-								<Text text="{courseModel>NAME}" />
-								<Text text="{courseModel>DATE}" />
-								<Text text="{courseModel>VALUE}" />
-								<Text text="{courseModel>CREATEDBY}" />
-								<Text text="{courseModel>CREATEDON}" />
-							</cells>
-						</ColumnListItem>
-					</items>
-				</Table>
-			</Panel>
-		</Page>
+		<t:ToolPage title="{i18n>appName}" id="toolPage">
+			<t:header>
+				<t:ToolHeader>
+					<Button id="sideNavigationToggleButton" 
+						icon="sap-icon://menu2"
+						type="Transparent"
+						press="onCollapseExpandPress">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow" />
+						</layoutData>
+					</Button>
+					<Label text="{i18n>navigation}"></Label>
+					<ToolbarSpacer>
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px" />
+						</layoutData>
+					</ToolbarSpacer>
+					<Label text="{i18n>appName}"></Label>
+				</t:ToolHeader>
+			</t:header>
+			<t:sideContent>
+				<t:SideNavigation id="sideNavigation">
+						<t:NavigationList>
+							<t:NavigationListItem text="{i18n>item1}" select="onCreateCur" icon="sap-icon://employee"/>
+							<t:NavigationListItem text="{i18n>item2}" select="onCurList" icon="sap-icon://building"/>
+							<t:NavigationListItem text="{i18n>item3}" select="onAuth" icon="sap-icon://card"/>
+							<t:NavigationListItem text="{i18n>item4}" select="onScope" icon="sap-icon://car-rental"/>
+							<t:NavigationListItem text="{i18n>item5}" select="onRoutes" icon="sap-icon://redo"/>
+						</t:NavigationList>
+				</t:SideNavigation>
+			</t:sideContent>
+			<t:mainContents>
+				<ScrollContainer horizontal="false"
+								 vertical="true"
+								 height="100%">
+					<Panel id="countPanel" headerText="{i18n>currentcourse}">
+						<content>
+							<l:HorizontalLayout class="sapUiContentPadding">
+								<Label text="{i18n>firstPayment}" class="sapUiSmallMargin" />
+								<Input id="inputFirstCourse" type="Number" value="193.87" description="{i18n>euro}" valueLiveUpdate="true" width="100%" />
+							</l:HorizontalLayout>
+							<l:HorizontalLayout class="sapUiContentPadding">
+								<Label text="{i18n>secondPayment}" class="sapUiSmallMargin" />
+								<Input id="inputSecCourse" type="Number" value="351.55" description="{i18n>euro}" valueLiveUpdate="true" width="100%" />
+							</l:HorizontalLayout>
+							<l:VerticalLayout class="sapUiContentPadding" width="100%">
+								<Button text="{i18n>count}" press=".onCount" width="150px" />
+								<Text text="First Payment (EUR to BEL): {countData>/recipient/course} * {countData>/recipient/fvalue} = {countData>/recipient/fcount}" />
+								<Text text="Second Payment (EUR to BEL): {countData>/recipient/course} * {countData>/recipient/svalue} = {countData>/recipient/scount}" />
+								<Text text="The Sum: {countData>/recipient/sum}" />
+							</l:VerticalLayout>
+						</content>
+					</Panel>
+					<Table id="currencyTable" busyIndicatorDelay="0" growing="true" growingScrollToLoad="true" noDataText="{i18n>tableNoDataText}" items="{/currency}" width="auto">
+						<headerToolbar>
+							<Toolbar>
+								<Title id="idCountTitle1" text="{i18n>currency}" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="20%">
+								<Label text="{i18n>cuid}" design="Bold" />
+							</Column>
+							<Column>
+								<Label text="{i18n>name}" design="Bold" />
+							</Column>
+							<Column>
+								<Label text="{i18n>createdby}" design="Bold" />
+							</Column>
+							<Column>
+								<Label text="{i18n>createdon}" design="Bold" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="onGoToDetail">
+								<cells>
+									<Text text="{cuid}" />
+									<Text text="{name}" />
+									<Text text="{createdby}" />
+									<Text text="{createdon}" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<Panel headerText="{i18n>courses}" expandable="true" expand=".onChange">
+						<Table id="courseTable" busyIndicatorDelay="0" growing="true" growingScrollToLoad="true" noDataText="{i18n>tableNoDataText}" items="{ path : 'courseModel>/',
+								sorter: { path : 'courseModel>COID',
+										descending: true } 
+								}" width="auto">
+							<columns>
+								<Column>
+									<Label text="{i18n>coid}" design="Bold" />
+								</Column>
+								<Column width="20%">
+									<Label text="{i18n>name}" design="Bold" />
+								</Column>
+								<Column>
+									<Label text="{i18n>date}" design="Bold" />
+								</Column>
+								<Column>
+									<Label text="{i18n>value}" design="Bold" />
+								</Column>
+								<Column>
+									<Label text="{i18n>createdby}" design="Bold" />
+								</Column>
+								<Column>
+									<Label text="{i18n>createdon}" design="Bold" />
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Navigation">
+									<cells>
+										<Text text="{courseModel>COID}" />
+										<Text text="{courseModel>NAME}" />
+										<Text text="{courseModel>DATE}" />
+										<Text text="{courseModel>VALUE}" />
+										<Text text="{courseModel>CREATEDBY}" />
+										<Text text="{courseModel>CREATEDON}" />
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</Panel>
+				</ScrollContainer>
+			</t:mainContents>
+		</t:ToolPage>
 	</Shell>
 </View>
