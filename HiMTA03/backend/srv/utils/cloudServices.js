@@ -6,7 +6,7 @@ const request = require('request-promise');
 const xsenv = require("@sap/xsenv");
 
 //begin----------GETTING CONFIGURATIONS-------------
-const pt_uaa = xsenv.getServices({
+/* const pt_uaa = xsenv.getServices({
     xsuaa: {
         tag: "xsuaa"
     }
@@ -131,3 +131,4 @@ module.exports = {
 
     getOnPremiseSystemData: getOnPremiseSystemData
 };
+ */
